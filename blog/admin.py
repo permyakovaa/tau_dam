@@ -1,5 +1,10 @@
 from django.contrib import admin
-from .models import Post
+from .models import Post, Project
 
-# Register your models here.
+
+class ProjectAdmin(admin.ModelAdmin):
+    fields = ('title', 'description', 'created_at', 'thumbnail')
+
+
 admin.site.register(Post)
+admin.site.register(Project, ProjectAdmin)

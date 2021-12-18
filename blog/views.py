@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 # Create your views here.
-from .models import Post
+from .models import Post, Project
 
 
 def blog_list(request):
@@ -10,7 +10,7 @@ def blog_list(request):
         'posts': posts
     }
 
-    return render(request, "blog/blog_list.html", context)
+    return render(request, "project/list.html", context)
 
 
 def blog_details(request, id):
@@ -19,4 +19,13 @@ def blog_details(request, id):
         'post': post
     }
 
-    return render(request, "blog/blog_details.html", context)
+    return render(request, "project/details.html", context)
+
+
+def projects_list(request):
+    projects = Project.objects.all()
+    context = {
+        'projects': projects
+    }
+
+    return render(request, "project/list.html", context)
