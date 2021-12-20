@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 # Create your views here.
-from .models import Post, Project
+from .models import Post, Project, Event
 
 
 def blog_list(request):
@@ -13,10 +13,12 @@ def blog_list(request):
     return render(request, "project/list.html", context)
 
 
-def blog_details(request, id):
-    post = Post.objects.get(id=id)
+def project_details(request, id):
+    project = Project.objects.get(id=id)
+    events = Event.objects.filter(project__id=project.id)
     context = {
-        'post': post
+        'project': project,
+        'events': events
     }
 
     return render(request, "project/details.html", context)
