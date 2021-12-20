@@ -6,7 +6,7 @@ def file_path_dir(instance, filename):
 
 
 class Post(models.Model):
-    objects = None
+    objects = models.Manager()
     title = models.CharField(max_length=50)
     content = models.TextField()
 
@@ -15,7 +15,7 @@ class Post(models.Model):
 
 
 class Project(models.Model):
-    objects = None
+    objects = models.Manager()
     title = models.CharField(max_length=50)
     description = models.TextField()
     created_at = models.DateTimeField()
@@ -26,7 +26,7 @@ class Project(models.Model):
 
 
 class Event(models.Model):
-    objects = None
+    objects = models.Manager()
     title = models.CharField(max_length=50)
     description = models.TextField()
     created_at = models.DateTimeField()
