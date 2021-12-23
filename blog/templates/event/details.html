@@ -4,6 +4,7 @@
 {% bootstrap_javascript %}
 
 {% bootstrap_messages %}
+{% load bootstrap_icons %}
 
 <body cz-shortcut-listen="true">
 
@@ -47,6 +48,7 @@
                         <h1 class="bd-title mt-0">Событие: {{event.title}}</h1>
                         <p class="bd-lead">{{event.description}}</p>
                     </div>
+
                     {% for dir in main_dir.child_dirs.all %}
                     <div class="col">
                           <div class="card shadow-sm">
@@ -62,7 +64,30 @@
                                               <a href="" class="btn btn-sm btn-outline-secondary">Просмотр</a>
                                               <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
                                             </div>
-                                            <small class="text-muted">{{ dir.title }}</small>
+                                            <small class="text-muted">{% bs_icon 'folder' %} {{ dir.title }}</small>
+                                      </div>
+                                </div>
+                          </div>
+                    </div>
+                    {% endfor %}
+                    {% for file in main_dir.files.all %}
+                    <div class="col">
+                          <div class="card shadow-sm">
+
+
+                                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                                    <title>{{ file }}</title>
+                                    <rect width="100%" height="100%" fill="#ccc"></rect>
+                                    <image href="/{{ file.file }}" width="100%" />
+                                </svg>
+                                <div class="card-body">
+                                      <p class="card-text"></p>
+                                      <div class="d-flex justify-content-between align-items-center">
+                                            <div class="btn-group">
+                                              <a href="" class="btn btn-sm btn-outline-secondary">Просмотр</a>
+                                              <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                            </div>
+                                            <small class="text-muted">{% bs_icon 'card-image' %} {{ file.title }}</small>
                                       </div>
                                 </div>
                           </div>

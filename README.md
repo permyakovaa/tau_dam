@@ -6,9 +6,10 @@
 ```bash
 $ git clone https://gitlab.npo-at.com/backoffice/media-server
 ```
-2. Установить зависимости python mysql
+2. Установить зависимости python
 ```bash
 $ pip install mysqlclient
+$ pip install django-bootstrap-icons
 ```
 3. Указать настройки mysl
 ```bash
