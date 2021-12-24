@@ -1,0 +1,15 @@
+{% extends "base_template.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}
+    <div class="col-xl-12">
+        <h1 class="bd-title mt-0 float-start">Добавить проект</h1>
+    </div>
+{% endblock %}
+{% block content %}
+    <form method="POST" class="project-form col-xl-12" enctype="multipart/form-data">{% csrf_token %}
+        {{ form | crispy }}
+        <button type="submit" class="save btn btn-primary my-2 float-end">Save</button>
+    </form>
+{% endblock %}
