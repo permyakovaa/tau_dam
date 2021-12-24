@@ -8,8 +8,10 @@ $ git clone https://gitlab.npo-at.com/backoffice/media-server
 ```
 2. Установить зависимости python
 ```bash
-$ pip install mysqlclient
-$ pip install django-bootstrap-icons
+$ pip3 install mysqlclient
+$ pip3 install django-bootstrap-icons
+$ pip3 install django-crispy-forms
+$ pip3 install crispy-bootstrap5
 ```
 3. Указать настройки mysl
 ```bash

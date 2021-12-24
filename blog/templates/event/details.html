@@ -3,7 +3,7 @@
 
 {% block title %}
     <div class="col-xl-12">
-        <h1 class="bd-title mt-0">Событие: {{event.title}}</h1>
+        <h1 class="bd-title mt-0">{{ _('Event') }}: {{event.title}}</h1>
         <p class="bd-lead">{{event.description}}</p>
     </div>
 {% endblock %}
@@ -20,8 +20,8 @@
                           <p class="card-text">{{ dir.description }} </p>
                           <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                  <a href="" class="btn btn-sm btn-outline-secondary">Просмотр</a>
-                                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                  <a href="" class="btn btn-sm btn-outline-secondary">{{ _('View') }}</a>
+                                  <button type="button" class="btn btn-sm btn-outline-secondary">{{ _('Edit') }}</button>
                                 </div>
                                 <small class="text-muted">{% bs_icon 'folder' %} {{ dir.title }}</small>
                           </div>
@@ -43,8 +43,8 @@
                           <p class="card-text"></p>
                           <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                  <a href="" class="btn btn-sm btn-outline-secondary">Просмотр</a>
-                                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                  <a href="" class="btn btn-sm btn-outline-secondary">{{ _('View') }}</a>
+                                  <button type="button" class="btn btn-sm btn-outline-secondary">{{ _('Edit') }}</button>
                                 </div>
                                 <small class="text-muted">{% bs_icon 'card-image' %} {{ file.title }}</small>
                           </div>
