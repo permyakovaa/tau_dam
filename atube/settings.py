@@ -28,6 +28,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
 
 # Application definition
 
@@ -40,7 +43,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog',
     'bootstrap5',
-    'django_bootstrap_icons'
+    'django_bootstrap_icons',
+    'crispy_forms',
+    "crispy_bootstrap5"
 ]
 
 MIDDLEWARE = [
@@ -130,3 +135,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 UPLOADS_ROOT = os.path.join(BASE_DIR, 'uploads')
 UPLOADS_URL = '/uploads/'
+
