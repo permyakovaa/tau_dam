@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 from .models import Project, Event, Directory
-from .forms import ProjectForm
+from .forms import ProjectForm, EventForm
 from django.shortcuts import redirect, get_object_or_404
 
 
@@ -27,7 +27,7 @@ def project_new(request):
     else:
         form = ProjectForm()
 
-    return render(request, 'project/new.html', {'form': form})
+    return render(request, 'project/form.html', {'form': form, 'type': 'new'})
 
 
 def project_edit(request, id):
@@ -42,7 +42,35 @@ def project_edit(request, id):
     else:
         form = ProjectForm(instance=project)
 
-    return render(request, 'project/new.html', {'form': form})
+    return render(request, 'project/form.html', {'form': form, 'type': 'edit'})
+
+
+def event_new(request):
+    if request.method == "POST":
+        form = EventForm(request.POST, request.FILES)
+        if form.is_valid():
+            event = form.save(commit=False)
+            event.save()
+            return redirect('event_details', id=event.pk)
+    else:
+        form = ProjectForm()
+
+    return render(request, 'event/form.html', {'form': form, 'type': 'new'})
+
+
+def event_edit(request, id):
+    event = get_object_or_404(Event, id=id)
+    if request.method == "POST":
+        form = EventForm(request.POST, request.FILES, instance=event)
+        if form.is_valid():
+            event = form.save(commit=False)
+            # post.author = request.user
+            event.save()
+            return redirect('event_details', id=event.pk)
+    else:
+        form = EventForm(instance=event)
+
+    return render(request, 'event/form.html', {'form': form, 'type': 'edit'})
 
 
 def event_details(request, id):
