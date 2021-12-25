@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-25 10:42+0000\n"
+"POT-Creation-Date: 2021-12-25 15:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -44,7 +44,7 @@ msgstr "Превью"
 msgid "Project"
 msgstr "Проект"
 
-#: blog/templates/directory/form.html:9 blog/templates/event/details.html:11
+#: blog/templates/directory/form.html:9 blog/templates/event/details.html:12
 msgid "Add new directory"
 msgstr "Добавить новую директорию"
 
@@ -57,11 +57,19 @@ msgstr "Редактировать директорию"
 msgid "Save"
 msgstr "Сохранить"
 
-#: blog/templates/event/details.html:7
+#: blog/templates/event/details.html:8
 msgid "Event"
 msgstr "Событие"
 
-#: blog/templates/event/details.html:39
+#: blog/templates/event/details.html:21
+msgid "Drag and drop files to this area"
+msgstr "Загрузите файлы с помощью диалога выбора файлов или перетащив нужные изображения в выделенную область"
+
+#: blog/templates/event/details.html:23
+msgid "Select files"
+msgstr "Выберите файлы"
+
+#: blog/templates/event/details.html:45
 msgid "Directory is empty"
 msgstr "Директория пуста"
 
