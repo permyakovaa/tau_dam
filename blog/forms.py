@@ -1,5 +1,5 @@
 from django import forms
-from .models import Project, Event, Directory
+from .models import Project, Event, Directory, File
 from django.utils.translation import gettext as _
 
 
@@ -36,3 +36,9 @@ class DirectoryForm(forms.ModelForm):
         labels = {
             'title': _('Title')
         }
+
+
+class FileForm(forms.ModelForm):
+    class Meta:
+        model = File
+        fields = ('file',)

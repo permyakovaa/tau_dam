@@ -1,9 +1,10 @@
 from django.shortcuts import render
 
-from .models import Project, Event, Directory
-from .forms import ProjectForm, EventForm, DirectoryForm
+from .models import Project, Event, Directory, File
+from .forms import ProjectForm, EventForm, DirectoryForm, FileForm
 from django.shortcuts import redirect, get_object_or_404
 from django.utils import timezone
+from django.http import JsonResponse
 
 
 def project_details(request, id):
@@ -109,6 +110,23 @@ def directory_new(request, event_id, parent_dir_id):
         form = DirectoryForm
 
     return render(request, 'directory/form.html', {'form': form, 'type': 'new'})
+
+
+def file_new(request, dir_id):
+    directory = get_object_or_404(Directory, id=dir_id)
+    if request.method == "POST":
+        form = FileForm(request.POST, request.FILES)
+        if form.is_valid():
+            file = form.save(commit=False)
+            file.title = file.file
+            file.owner = request.user
+            file.created_at = timezone.now()
+            file.parent_dir = directory
+            file.save()
+
+            return JsonResponse({'status': 'ok'})
+
+    return JsonResponse({'status': 'error'})
 
 
 def projects_list(request):
