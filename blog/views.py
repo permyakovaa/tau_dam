@@ -129,6 +129,16 @@ def file_new(request, dir_id):
     return JsonResponse({'status': 'error'})
 
 
+def file_remove(request, id):
+    file = get_object_or_404(File, id=id)
+    dir_id = file.parent_dir.id
+    event_id = file.parent_dir.event.id
+
+    file.delete()
+
+    return redirect('dir_details', id=event_id, dir_id=dir_id)
+
+
 def projects_list(request):
     projects = Project.objects.all()
     context = {

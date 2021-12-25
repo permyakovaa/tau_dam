@@ -1,0 +1,62 @@
+.file-row {
+    line-height: 4em;
+    margin-top: 10px !important;
+    padding-bottom: 10px;
+    text-decoration: none;
+    color: #000;
+}
+.file-row:hover {
+    background: #f1f1f1;
+    cursor: pointer;
+    color: #000;
+}
+.navigation-link {
+    color: #000;
+    text-decoration:none;
+}
+#drop-area {
+    border: 2px dashed #ccc;
+    border-radius: 5px;
+    width: 100%;
+    font-family: sans-serif;
+    margin: 0px auto;
+    padding: 20px;
+}
+#drop-area.highlight {
+  border-color: purple;
+}
+.my-form {
+    margin-bottom: 10px;
+}
+#gallery {
+    margin-top: 10px;
+}
+#gallery img {
+      width: 150px;
+      margin-bottom: 10px;
+      margin-right: 10px;
+      vertical-align: middle;
+}
+.button {
+      display: inline-block;
+      padding: 10px;
+      background: #ccc;
+      cursor: pointer;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+}
+.button:hover {
+    background: #ddd;
+}
+#fileElem {
+    display: none;
+}
+.remove-file {
+    display: none;
+}
+.file-row:hover .remove-file {
+    display: initial;
+}
+.remove-file:hover svg {
+    fill: #555;
+}
