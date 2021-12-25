@@ -1,3 +1,4 @@
+import os
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -59,6 +60,26 @@ class File(models.Model):
     file = models.FileField(upload_to=project_path_dir)
     parent_dir = models.ForeignKey(Directory, on_delete=models.PROTECT, related_name='files')
     owner = models.ForeignKey(User, on_delete=models.PROTECT)
+
+    def extension(self):
+        name, extension = os.path.splitext(self.file.name)
+        return extension
+
+    def size(self):
+        b = self.file.size
+        if b < 1000:
+            return '%i' % b + 'b'
+        elif 1000 <= b < 1000000:
+            return '%.1f' % float(b / 1000) + 'kb'
+        elif 1000000 <= b < 1000000000:
+            return '%.1f' % float(b / 1000000) + 'mb'
+        elif 1000000000 <= b < 1000000000000:
+            return '%.1f' % float(b / 1000000000) + 'gb'
+
+        return
+
+    def is_image(self):
+        return self.extension() in ['.png', '.jpeg', '.jpg']
 
     def __str__(self):
         return self.title

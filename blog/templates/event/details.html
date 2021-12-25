@@ -15,14 +15,19 @@
     {% if current_dir.parent_dir is not empty %}
         <a href="{% url 'dir_details' event.id current_dir.parent_dir.id %}"  class="navigation-link">{% bs_icon 'arrow-left' color='orange' %} {{current_dir.parent_dir.title}}</a>
     {% endif %}
+        <div id="drop-area">
+            <form class="my-form">
+                <p>Загрузите файлы с помощью диалога выбора файлов или перетащив нужные изображения в выделенную область</p>
+                <input type="file" id="fileElem" multiple onchange="handleFiles(this.files)">
+                <label class="btn btn-primary my-2" for="fileElem">Выбрать файлы</label>
+            </form>
+            <div id="gallery"></div>
+            <progress id="progress-bar" max=100 value=0></progress>
+        </div>
     </div>
 {% endblock %}
 {% block content %}
-    <style type="text/css">
-        .file-row {line-height: 4em; margin-top: 10px !important;padding-bottom: 10px;text-decoration: none; color: #000;}
-        .file-row:hover {background: #f1f1f1;cursor: pointer;color: #000;}
-        .navigation-link {color: #000;text-decoration:none;}
-    </style>
+
     {% for dir in current_dir.child_dirs.all %}
     <a href="{% url 'dir_details' event.id dir.id %}" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 file-row">
         <div class="col-xl-1">
@@ -41,14 +46,149 @@
     {% for file in current_dir.files.all %}
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 file-row">
         <div class="col-xl-1">
-              {% bs_icon 'card-image' size='4em'%}
+            {% if file.is_image %}
+                <img src="{{file.file.url}}" style="width:75px;">
+            {% else %}
+                {% bs_icon 'card-image' size='4em'%}
+            {% endif %}
         </div>
-        <div class="col-xl-9">
+        <div class="col-xl-8">
               {{ file.title }}
+        </div>
+        <div class="col-xl-1">
+              {{ file.size }}
         </div>
         <div class="col-xl-2">
               {{ file.created_at }}
         </div>
     </div>
     {% endfor %}
+
+
+    <style type="text/css">
+        .file-row {line-height: 4em; margin-top: 10px !important;padding-bottom: 10px;text-decoration: none; color: #000;}
+        .file-row:hover {background: #f1f1f1;cursor: pointer;color: #000;}
+        .navigation-link {color: #000;text-decoration:none;}
+        #drop-area {
+            border: 2px dashed #ccc;
+            border-radius: 5px;
+            width: 100%;
+            font-family: sans-serif;
+            margin: 0px auto;
+            padding: 20px;
+        }
+        #drop-area.highlight {
+          border-color: purple;
+        }
+        p {
+          margin-top: 0;
+        }
+        .my-form {
+          margin-bottom: 10px;
+        }
+        #gallery {
+          margin-top: 10px;
+        }
+        #gallery img {
+          width: 150px;
+          margin-bottom: 10px;
+          margin-right: 10px;
+          vertical-align: middle;
+        }
+        .button {
+          display: inline-block;
+          padding: 10px;
+          background: #ccc;
+          cursor: pointer;
+          border-radius: 5px;
+          border: 1px solid #ccc;
+        }
+        .button:hover {
+          background: #ddd;
+        }
+        #fileElem {
+          display: none;
+        }
+    </style>
+    <script type="text/javascript">
+        let dropArea = document.getElementById('drop-area')
+        let uploadProgress = []
+        let progressBar = document.getElementById('progress-bar')
+
+        ;['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+          dropArea.addEventListener(eventName, preventDefaults, false)
+        })
+        function preventDefaults (e) {
+          e.preventDefault()
+          e.stopPropagation()
+        }
+        ;['dragenter', 'dragover'].forEach(eventName => {
+          dropArea.addEventListener(eventName, highlight, false)
+        })
+        ;['dragleave', 'drop'].forEach(eventName => {
+          dropArea.addEventListener(eventName, unhighlight, false)
+        })
+        function highlight(e) {
+          dropArea.classList.add('highlight')
+        }
+        function unhighlight(e) {
+          dropArea.classList.remove('highlight')
+        }
+        dropArea.addEventListener('drop', handleDrop, false)
+        function handleDrop(e) {
+          let dt = e.dataTransfer
+          let files = dt.files
+          handleFiles(files)
+        }
+        function handleFiles(files) {
+              files = [...files]
+              initializeProgress(files.length)
+              files.forEach(uploadFile)
+              files.forEach(previewFile)
+        }
+
+        function uploadFile(file, i) { // <- Добавили параметр `i`
+              var url = '{% url 'file_new' current_dir.id %}'
+              var xhr = new XMLHttpRequest()
+              var formData = new FormData()
+              xhr.open('POST', url, true)
+              // Добавили следующие слушатели
+              xhr.upload.addEventListener("progress", function(e) {
+                updateProgress(i, (e.loaded * 100.0 / e.total) || 100)
+              })
+              xhr.addEventListener('readystatechange', function(e) {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                  // Готово. Сообщаем пользователю
+                }
+                else if (xhr.readyState == 4 && xhr.status != 200) {
+                  // Ошибка. Сообщаем пользователю
+                }
+              })
+              formData.append('file', file)
+              formData.append('csrfmiddlewaretoken', '{{ csrf_token }}')
+              xhr.send(formData)
+        }
+        function previewFile(file) {
+              let reader = new FileReader()
+              reader.readAsDataURL(file)
+              reader.onloadend = function() {
+                    let img = document.createElement('img')
+                    img.src = reader.result
+                    document.getElementById('gallery').appendChild(img)
+              }
+        }
+        function initializeProgress(numFiles) {
+              progressBar.value = 0
+              uploadProgress = []
+              for(let i = numFiles; i > 0; i--) {
+                    uploadProgress.push(0)
+              }
+        }
+
+        function updateProgress(fileNumber, percent) {
+              uploadProgress[fileNumber] = percent
+              let total = uploadProgress.reduce((tot, curr) => tot + curr, 0) / uploadProgress.length
+              progressBar.value = total
+        }
+    </script>
 {% endblock %}
