@@ -8,48 +8,34 @@
     </div>
 {% endblock %}
 {% block content %}
+    <style type="text/css">
+        .file-row {line-height: 4em; margin-top: 10px !important;padding-bottom: 10px;}
+        .file-row:hover {background: #f1f1f1;cursor: pointer;}
+    </style>
     {% for dir in main_dir.child_dirs.all %}
-        <div class="col">
-              <div class="card shadow-sm">
-                    <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                        <title>{{ dir }}</title>
-                        <rect width="100%" height="100%" fill="#ccc"></rect>
-                        <image href="/{{ dir.thumbnail }}" width="100%" />
-                    </svg>
-                    <div class="card-body">
-                          <p class="card-text">{{ dir.description }} </p>
-                          <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                  <a href="" class="btn btn-sm btn-outline-secondary">{{ _('View') }}</a>
-                                  <button type="button" class="btn btn-sm btn-outline-secondary">{{ _('Edit') }}</button>
-                                </div>
-                                <small class="text-muted">{% bs_icon 'folder' %} {{ dir.title }}</small>
-                          </div>
-                    </div>
-              </div>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 file-row">
+        <div class="col-xl-1">
+              {% bs_icon 'folder' size='4em' color='orange' %}
         </div>
-        {% endfor %}
-        {% for file in main_dir.files.all %}
-        <div class="col">
-              <div class="card shadow-sm">
-
-
-                    <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                        <title>{{ file }}</title>
-                        <rect width="100%" height="100%" fill="#ccc"></rect>
-                        <image href="/{{ file.file }}" width="100%" />
-                    </svg>
-                    <div class="card-body">
-                          <p class="card-text"></p>
-                          <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                  <a href="" class="btn btn-sm btn-outline-secondary">{{ _('View') }}</a>
-                                  <button type="button" class="btn btn-sm btn-outline-secondary">{{ _('Edit') }}</button>
-                                </div>
-                                <small class="text-muted">{% bs_icon 'card-image' %} {{ file.title }}</small>
-                          </div>
-                    </div>
-              </div>
+        <div class="col-xl-9">
+              {{ dir.title }}
         </div>
+        <div class="col-xl-2">
+              {{ dir.created_at }}
+        </div>
+    </div>
+    {% endfor %}
+    {% for file in main_dir.files.all %}
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 file-row">
+        <div class="col-xl-1">
+              {% bs_icon 'card-image' size='4em'%}
+        </div>
+        <div class="col-xl-9">
+              {{ file.title }}
+        </div>
+        <div class="col-xl-2">
+              {{ file.created_at }}
+        </div>
+    </div>
     {% endfor %}
 {% endblock %}

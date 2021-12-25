@@ -3,6 +3,7 @@ from django.shortcuts import render
 from .models import Project, Event, Directory
 from .forms import ProjectForm, EventForm
 from django.shortcuts import redirect, get_object_or_404
+from django.utils import timezone
 
 
 def project_details(request, id):
@@ -21,7 +22,8 @@ def project_new(request):
         form = ProjectForm(request.POST, request.FILES)
         if form.is_valid():
             project = form.save(commit=False)
-            # post.author = request.user
+            project.owner = request.user
+            project.created_at = timezone.now()
             project.save()
             return redirect('project_details', id=project.pk)
     else:
@@ -36,7 +38,6 @@ def project_edit(request, id):
         form = ProjectForm(request.POST, request.FILES, instance=project)
         if form.is_valid():
             project = form.save(commit=False)
-            # post.author = request.user
             project.save()
             return redirect('project_details', id=project.pk)
     else:
@@ -50,6 +51,8 @@ def event_new(request):
         form = EventForm(request.POST, request.FILES)
         if form.is_valid():
             event = form.save(commit=False)
+            event.owner = request.user
+            event.created_at = timezone.now()
             event.save()
             return redirect('event_details', id=event.pk)
     else:
@@ -64,7 +67,6 @@ def event_edit(request, id):
         form = EventForm(request.POST, request.FILES, instance=event)
         if form.is_valid():
             event = form.save(commit=False)
-            # post.author = request.user
             event.save()
             return redirect('event_details', id=event.pk)
     else:
