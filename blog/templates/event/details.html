@@ -3,17 +3,28 @@
 
 {% block title %}
     <div class="col-xl-12">
-        <h1 class="bd-title mt-0">{{ _('Event') }}: {{event.title}}</h1>
-        <p class="bd-lead">{{event.description}}</p>
+        <div class="actions float-start">
+            <h1 class="bd-title mt-0">{{ _('Event') }}: {{event.title}}</h1>
+            <p class="bd-lead">{{event.description}}</p>
+        </div>
+        <div class="actions float-end">
+            <a href="{% url 'directory_new' event.id current_dir.id %}" class="btn btn-primary my-2">{{ _('Add new directory') }}</a>
+        </div>
+    </div>
+    <div class="col-xl-12">
+    {% if current_dir.parent_dir is not empty %}
+        <a href="{% url 'dir_details' event.id current_dir.parent_dir.id %}"  class="navigation-link">{% bs_icon 'arrow-left' color='orange' %} {{current_dir.parent_dir.title}}</a>
+    {% endif %}
     </div>
 {% endblock %}
 {% block content %}
     <style type="text/css">
-        .file-row {line-height: 4em; margin-top: 10px !important;padding-bottom: 10px;}
-        .file-row:hover {background: #f1f1f1;cursor: pointer;}
+        .file-row {line-height: 4em; margin-top: 10px !important;padding-bottom: 10px;text-decoration: none; color: #000;}
+        .file-row:hover {background: #f1f1f1;cursor: pointer;color: #000;}
+        .navigation-link {color: #000;text-decoration:none;}
     </style>
-    {% for dir in main_dir.child_dirs.all %}
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 file-row">
+    {% for dir in current_dir.child_dirs.all %}
+    <a href="{% url 'dir_details' event.id dir.id %}" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 file-row">
         <div class="col-xl-1">
               {% bs_icon 'folder' size='4em' color='orange' %}
         </div>
@@ -23,9 +34,11 @@
         <div class="col-xl-2">
               {{ dir.created_at }}
         </div>
-    </div>
+    </a>
+    {% empty %}
+        <p class="bd-lead">{{ _('Directory is empty')}}</p>
     {% endfor %}
-    {% for file in main_dir.files.all %}
+    {% for file in current_dir.files.all %}
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 file-row">
         <div class="col-xl-1">
               {% bs_icon 'card-image' size='4em'%}

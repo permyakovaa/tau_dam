@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 from .models import Project, Event, Directory
-from .forms import ProjectForm, EventForm
+from .forms import ProjectForm, EventForm, DirectoryForm
 from django.shortcuts import redirect, get_object_or_404
 from django.utils import timezone
 
@@ -56,7 +56,7 @@ def event_new(request):
             event.save()
             return redirect('event_details', id=event.pk)
     else:
-        form = ProjectForm()
+        form = EventForm()
 
     return render(request, 'event/form.html', {'form': form, 'type': 'new'})
 
@@ -75,15 +75,40 @@ def event_edit(request, id):
     return render(request, 'event/form.html', {'form': form, 'type': 'edit'})
 
 
-def event_details(request, id):
+def event_details(request, id, dir_id=None):
     event = Event.objects.get(id=id)
-    main_dir = Directory.objects.filter(event__id=event.id, parent_dir__id__isnull=True).first()
+
+    if dir_id is not None:
+        current_dir = get_object_or_404(Directory, id=dir_id, event=event.pk)
+    else:
+        current_dir = Directory.objects.filter(event__id=event.id, parent_dir__id__isnull=True).first()
+
     context = {
         'event': event,
-        'main_dir': main_dir
+        'current_dir': current_dir
     }
 
     return render(request, "event/details.html", context)
+
+
+def directory_new(request, event_id, parent_dir_id):
+    event = get_object_or_404(Event, id=event_id)
+    parent_dir = get_object_or_404(Directory, id=parent_dir_id)
+    if request.method == "POST":
+        form = DirectoryForm(request.POST)
+        if form.is_valid():
+            directory = form.save(commit=False)
+            directory.owner = request.user
+            directory.created_at = timezone.now()
+            directory.event = event
+            directory.parent_dir = parent_dir
+
+            directory.save()
+            return redirect('dir_details', id=event.pk, dir_id=parent_dir.id)
+    else:
+        form = DirectoryForm
+
+    return render(request, 'directory/form.html', {'form': form, 'type': 'new'})
 
 
 def projects_list(request):

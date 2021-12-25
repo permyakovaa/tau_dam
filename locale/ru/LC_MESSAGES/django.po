@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-24 20:32+0000\n"
+"POT-Creation-Date: 2021-12-25 10:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,39 +28,42 @@ msgstr "Русский"
 msgid "English"
 msgstr "Английский"
 
-#: blog/forms.py:12 blog/forms.py:25
+#: blog/forms.py:12 blog/forms.py:24 blog/forms.py:37
 msgid "Title"
 msgstr "Название"
 
-#: blog/forms.py:13 blog/forms.py:26
+#: blog/forms.py:13 blog/forms.py:25
 msgid "Description"
 msgstr "Описание"
 
-#: blog/forms.py:14 blog/forms.py:27
-msgid "Created At"
-msgstr "Дата создания"
-
-#: blog/forms.py:15 blog/forms.py:28
+#: blog/forms.py:14 blog/forms.py:26
 msgid "Thumbnail"
 msgstr "Превью"
 
-#: blog/forms.py:29
+#: blog/forms.py:27
 msgid "Project"
 msgstr "Проект"
 
-#: blog/templates/event/details.html:6
+#: blog/templates/directory/form.html:9 blog/templates/event/details.html:11
+msgid "Add new directory"
+msgstr "Добавить новую директорию"
+
+#: blog/templates/directory/form.html:11
+msgid "Edit directory"
+msgstr "Редактировать директорию"
+
+#: blog/templates/directory/form.html:20 blog/templates/event/form.html:20
+#: blog/templates/project/form.html:20
+msgid "Save"
+msgstr "Сохранить"
+
+#: blog/templates/event/details.html:7
 msgid "Event"
 msgstr "Событие"
 
-#: blog/templates/event/details.html:23 blog/templates/project/details.html:25
-#: blog/templates/project/list.html:23
-msgid "View"
-msgstr "Просмотр"
-
-#: blog/templates/event/details.html:24 blog/templates/project/details.html:26
-#: blog/templates/project/list.html:24
-msgid "Edit"
-msgstr "Редактирование"
+#: blog/templates/event/details.html:39
+msgid "Directory is empty"
+msgstr "Директория пуста"
 
 #: blog/templates/event/form.html:9 blog/templates/project/details.html:6
 msgid "Add new event"
@@ -70,13 +73,17 @@ msgstr "Добавить новое событие"
 msgid "Edit event"
 msgstr "Редактировать событие"
 
-#: blog/templates/event/form.html:19 blog/templates/project/form.html:19
-msgid "Save"
-msgstr "Сохранить"
-
 #: blog/templates/project/details.html:5
 msgid "Events"
 msgstr "События"
+
+#: blog/templates/project/details.html:26 blog/templates/project/list.html:24
+msgid "View"
+msgstr "Просмотр"
+
+#: blog/templates/project/details.html:27 blog/templates/project/list.html:25
+msgid "Edit"
+msgstr "Редактирование"
 
 #: blog/templates/project/form.html:9 blog/templates/project/list.html:6
 msgid "Add new project"
@@ -85,3 +92,6 @@ msgstr "Добавить новый проект"
 #: blog/templates/project/form.html:11
 msgid "Edit project"
 msgstr "Редактировать проект"
+
+#~ msgid "Created At"
+#~ msgstr "Дата создания"

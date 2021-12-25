@@ -1,0 +1,23 @@
+{% extends "base_template.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}
+    <div class="col-xl-12">
+        <h1 class="bd-title mt-0 float-start">
+             {% if type == 'new' %}
+                {{ _('Add new directory') }}
+            {% else %}
+                {{ _('Edit directory') }}
+            {% endif %}
+        </h1>
+    </div>
+{% endblock %}
+{% block content %}
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <form method="POST" class="event-form col-xl-12" enctype="multipart/form-data">{% csrf_token %}
+            {{ form | crispy }}
+            <button type="submit" class="save btn btn-primary my-2 float-end">{{ _('Save') }}</button>
+        </form>
+    </div>
+{% endblock %}

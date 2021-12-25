@@ -11,7 +11,7 @@ class EventAdmin(admin.ModelAdmin):
 
 
 class DirectoryAdmin(admin.ModelAdmin):
-    fields = ('title', 'description', 'created_at', 'thumbnail', 'event', 'parent_dir')
+    fields = ('title', 'created_at', 'thumbnail', 'event', 'parent_dir')
 
 
 class FileAdmin(admin.ModelAdmin):
