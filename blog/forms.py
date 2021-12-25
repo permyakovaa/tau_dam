@@ -1,5 +1,5 @@
 from django import forms
-from .models import Project, Event
+from .models import Project, Event, Directory
 from django.utils.translation import gettext as _
 
 
@@ -25,4 +25,14 @@ class EventForm(forms.ModelForm):
             'description': _('Description'),
             'thumbnail': _('Thumbnail'),
             'project': _('Project'),
+        }
+
+
+class DirectoryForm(forms.ModelForm):
+    class Meta:
+        model = Directory
+        fields = ('title',)
+
+        labels = {
+            'title': _('Title')
         }

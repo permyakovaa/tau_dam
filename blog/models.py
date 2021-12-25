@@ -42,7 +42,6 @@ class Event(models.Model):
 class Directory(models.Model):
     objects = models.Manager()
     title = models.CharField(max_length=50)
-    description = models.TextField()
     created_at = models.DateTimeField()
     thumbnail = models.FileField(upload_to=dir_thumb_path_dir)
     event = models.ForeignKey(Event, on_delete=models.PROTECT, related_name='directories')
