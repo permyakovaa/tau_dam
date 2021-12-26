@@ -14,7 +14,7 @@
     </div>
     <div class="col-xl-12">
     {% if current_dir.parent_dir is not empty %}
-        <a href="{% url 'dir_details' event.id current_dir.parent_dir.id %}"  class="navigation-link">{% bs_icon 'arrow-left' color='orange' %} {{current_dir.parent_dir.title}}</a>
+        <a href="{% url 'dir_details' event.id current_dir.parent_dir.id %}"  class="navigation-link">{% bs_icon 'arrow-left' size='1.5em' color='grey' %} {{current_dir.parent_dir.title}}</a>
     {% endif %}
         <div id="drop-area">
             <form class="my-form">
@@ -28,50 +28,69 @@
     </div>
 {% endblock %}
 {% block content %}
-
     {% for dir in current_dir.child_dirs.all %}
-    <a href="{% url 'dir_details' event.id dir.id %}" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 file-row">
-        <div class="col-xl-1">
-              {% bs_icon 'folder' size='4em' color='orange' %}
-        </div>
-        <div class="col-xl-9">
-              {{ dir.title }}
-        </div>
-        <div class="col-xl-2">
-              {{ dir.created_at }}
-        </div>
-    </a>
-    {% empty %}
-        <p class="bd-lead">{{ _('Directory is empty')}}</p>
+        <a href="{% url 'dir_details' event.id dir.id %}" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 file-row">
+            <div class="col-xl-1">
+                  {% bs_icon 'folder' size='4em' color='orange' %}
+            </div>
+            <div class="col-xl-9">
+                  {{ dir.title }}
+            </div>
+            <div class="col-xl-2">
+                  {{ dir.created_at }}
+            </div>
+        </a>
     {% endfor %}
     {% for file in current_dir.files.all %}
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 file-row">
-        <div class="col-xl-1">
-            {% if file.is_image %}
-                <img src="{{file.file.url}}" style="width:75px;">
-            {% else %}
-                {% bs_icon 'card-image' size='4em'%}
-            {% endif %}
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 file-row">
+            <div class="col-xl-1">
+                {% if file.is_image %}
+                    <img src="{{file.file.url}}" class="file-image-preview" style="width:75px;"
+                         data-bs-toggle="modal" data-bs-target="#previewImageModel" data-title="{{file.title}}" />
+                {% else %}
+                    {% bs_icon 'card-image' size='4em'%}
+                {% endif %}
+            </div>
+            <div class="col-xl-7">
+                {{ file.title }}
+            </div>
+            <div class="col-xl-1">
+                {{ file.file.size | filesizeformat }}
+            </div>
+            <div class="col-xl-2">
+                {{ file.created_at }}
+            </div>
+            <div class="col-xl-1">
+                <a href="{% url 'file_remove' file.id %}" class="remove-file">{% bs_icon 'x-circle-fill' color='#999' size='3em'%}</a>
+            </div>
         </div>
-        <div class="col-xl-7">
-            {{ file.title }}
-        </div>
-        <div class="col-xl-1">
-            {{ file.size }}
-        </div>
-        <div class="col-xl-2">
-            {{ file.created_at }}
-        </div>
-        <div class="col-xl-1">
-            <a href="{% url 'file_remove' file.id %}" class="remove-file">{% bs_icon 'x-circle-fill' color='#999' size='3em'%}</a>
-        </div>
-    </div>
     {% endfor %}
 
+    {% if current_dir.child_dirs.all|length < 1 and current_dir.files.all|length < 1  %}
+        <p class="bd-lead">{{ _('Directory is empty')}}</p>
+    {% endif %}
+
+    <div class="modal fade" id="previewImageModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                      <div class="modal-header">
+                            <h5 class="modal-title" id="modalLabel">Modal title</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                            <img src="" width="100%"/>
+                      </div>
+                      <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ _('Close') }}</button>
+                      </div>
+                </div>
+          </div>
+    </div>
     <script type="text/javascript">
         let url = '{% url 'file_new' current_dir.id %}';
         let csrf_token = '{{ csrf_token }}'
     </script>
-
     <script type="text/javascript" src="{% static 'js/dragndrop-file-load.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/vendor/cash.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/preview-images.js' %}"></script>
 {% endblock %}

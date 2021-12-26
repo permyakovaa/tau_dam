@@ -12,14 +12,22 @@
 }
 .navigation-link {
     color: #000;
-    text-decoration:none;
+    text-decoration: none;
+    margin-bottom: 10px;
+    font-size: 1.5em;
+}
+.navigation-link:hover {
+    color: #000;
+}
+.navigation-link:hover svg {
+    fill: #000;
 }
 #drop-area {
     border: 2px dashed #ccc;
     border-radius: 5px;
     width: 100%;
     font-family: sans-serif;
-    margin: 0px auto;
+    margin: 20px auto 0;
     padding: 20px;
 }
 #drop-area.highlight {
@@ -56,6 +64,9 @@
 }
 .file-row:hover .remove-file {
     display: initial;
+}
+.remove-file:hover svg {
+    fill: #555;
 }
 .remove-file:hover svg {
     fill: #555;
