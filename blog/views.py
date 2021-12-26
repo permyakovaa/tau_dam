@@ -47,14 +47,23 @@ def project_edit(request, id):
     return render(request, 'project/form.html', {'form': form, 'type': 'edit'})
 
 
-def event_new(request):
+def event_new(request, id):
     if request.method == "POST":
         form = EventForm(request.POST, request.FILES)
+        project = get_object_or_404(Project, id=id)
+
         if form.is_valid():
             event = form.save(commit=False)
+            directory = Directory()
+            directory.owner = request.user
+            directory.created_at = timezone.now()
+            directory.event = event
+
             event.owner = request.user
             event.created_at = timezone.now()
+            event.project = project
             event.save()
+            directory.save()
             return redirect('event_details', id=event.pk)
     else:
         form = EventForm()
