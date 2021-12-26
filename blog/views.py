@@ -136,7 +136,7 @@ def directory_new(request, event_id, parent_dir_id):
 
 @login_required
 @permission_required('blog.add_file', raise_exception=True)
-def file_new(request, dir_id):
+def add_file(request, dir_id):
     directory = get_object_or_404(Directory, id=dir_id)
     if request.method == "POST":
         form = FileForm(request.POST, request.FILES)
@@ -146,6 +146,7 @@ def file_new(request, dir_id):
             file.owner = request.user
             file.created_at = timezone.now()
             file.parent_dir = directory
+            file.size = file.file.size
             file.save()
 
             return JsonResponse({'status': 'ok'})

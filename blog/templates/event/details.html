@@ -60,7 +60,7 @@
                 {{ file.title }}
             </div>
             <div class="col-xl-1">
-                {{ file.file.size | filesizeformat }}
+                {{ file.size | filesizeformat }}
             </div>
             <div class="col-xl-2">
                 {{ file.created_at }}
@@ -94,7 +94,7 @@
           </div>
     </div>
     <script type="text/javascript">
-        let url = '{% url 'file_new' current_dir.id %}';
+        let url = '{% url 'add_file' current_dir.id %}';
         let csrf_token = '{{ csrf_token }}'
     </script>
     <script type="text/javascript" src="{% static 'js/dragndrop-file-load.js' %}"></script>

@@ -2,11 +2,14 @@
 
 {% block title %}
     <div class="col-xl-12">
-        <h1 class="bd-title mt-0 float-start">{{ _('Events') }}: {{project.title}}</h1>
+        <div class="float-start">
+            <h1 class="bd-title mt-0">{{ _('Events') }}: {{project.title}}</h1>
+            <p class="bd-lead float-start">{{project.description}}</p>
+        </div>
         {% if perms.blog.add_event %}
             <a href="{% url 'event_new' project.id %}" class="btn btn-primary my-2 float-end">{{ _('Add new event') }}</a>
         {% endif %}
-        <p class="bd-lead float-start">{{project.description}}</p>
+
     </div>
 {% endblock %}
 

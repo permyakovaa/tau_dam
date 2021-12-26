@@ -58,6 +58,7 @@ class File(models.Model):
     title = models.CharField(max_length=50)
     created_at = models.DateTimeField()
     file = models.FileField(upload_to=project_path_dir)
+    size = models.BigIntegerField()
     parent_dir = models.ForeignKey(Directory, on_delete=models.PROTECT, related_name='files')
     owner = models.ForeignKey(User, on_delete=models.PROTECT)
 
