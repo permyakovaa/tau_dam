@@ -65,19 +65,6 @@ class File(models.Model):
         name, extension = os.path.splitext(self.file.name)
         return extension
 
-    def size(self):
-        b = self.file.size
-        if b < 1000:
-            return '%i' % b + 'b'
-        elif 1000 <= b < 1000000:
-            return '%.1f' % float(b / 1000) + 'kb'
-        elif 1000000 <= b < 1000000000:
-            return '%.1f' % float(b / 1000000) + 'mb'
-        elif 1000000000 <= b < 1000000000000:
-            return '%.1f' % float(b / 1000000000) + 'gb'
-
-        return
-
     def is_image(self):
         return self.extension() in ['.png', '.jpeg', '.jpg']
 
