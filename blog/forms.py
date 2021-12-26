@@ -18,13 +18,12 @@ class ProjectForm(forms.ModelForm):
 class EventForm(forms.ModelForm):
     class Meta:
         model = Event
-        fields = ('title', 'description', 'thumbnail', 'project')
+        fields = ('title', 'description', 'thumbnail')
 
         labels = {
             'title': _('Title'),
             'description': _('Description'),
             'thumbnail': _('Thumbnail'),
-            'project': _('Project'),
         }
 
 
