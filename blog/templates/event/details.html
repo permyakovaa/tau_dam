@@ -9,13 +9,17 @@
             <p class="bd-lead">{{event.description}}</p>
         </div>
         <div class="actions float-end">
-            <a href="{% url 'directory_new' event.id current_dir.id %}" class="btn btn-primary my-2">{{ _('Add new directory') }}</a>
+            {% if perms.blog.add_directory %}
+                <a href="{% url 'directory_new' event.id current_dir.id %}" class="btn btn-primary my-2">{{ _('Add new directory') }}</a>
+            {% endif %}
         </div>
     </div>
     <div class="col-xl-12">
-    {% if current_dir.parent_dir is not empty %}
-        <a href="{% url 'dir_details' event.id current_dir.parent_dir.id %}"  class="navigation-link">{% bs_icon 'arrow-left' size='1.5em' color='grey' %} {{current_dir.parent_dir.title}}</a>
-    {% endif %}
+        {% if current_dir.parent_dir is not empty %}
+            <a href="{% url 'dir_details' event.id current_dir.parent_dir.id %}"  class="navigation-link">{% bs_icon 'arrow-left' size='1.5em' color='grey' %} {{current_dir.parent_dir.title}}</a>
+        {% endif %}
+
+        {% if perms.blog.add_file %}
         <div id="drop-area">
             <form class="my-form">
                 <p>{{ _('Drag and drop files to this area') }}</p>
@@ -25,6 +29,7 @@
             <div id="gallery"></div>
             <progress id="progress-bar" max=100 value=0></progress>
         </div>
+        {% endif %}
     </div>
 {% endblock %}
 {% block content %}
@@ -60,9 +65,11 @@
             <div class="col-xl-2">
                 {{ file.created_at }}
             </div>
-            <div class="col-xl-1">
-                <a href="{% url 'file_remove' file.id %}" class="remove-file">{% bs_icon 'x-circle-fill' color='#999' size='3em'%}</a>
-            </div>
+            {% if perms.blog.delete_file %}
+                <div class="col-xl-1">
+                    <a href="{% url 'file_remove' file.id %}" class="remove-file">{% bs_icon 'x-circle-fill' color='#999' size='3em'%}</a>
+                </div>
+            {% endif %}
         </div>
     {% endfor %}
 

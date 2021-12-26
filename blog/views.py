@@ -5,8 +5,10 @@ from .forms import ProjectForm, EventForm, DirectoryForm, FileForm
 from django.shortcuts import redirect, get_object_or_404
 from django.utils import timezone
 from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required, permission_required
 
 
+@login_required
 def project_details(request, id):
     project = Project.objects.get(id=id)
     events = Event.objects.filter(project__id=project.id)
@@ -18,6 +20,8 @@ def project_details(request, id):
     return render(request, "project/details.html", context)
 
 
+@login_required
+@permission_required('blog.add_project', raise_exception=True)
 def project_new(request):
     if request.method == "POST":
         form = ProjectForm(request.POST, request.FILES)
@@ -33,6 +37,8 @@ def project_new(request):
     return render(request, 'project/form.html', {'form': form, 'type': 'new'})
 
 
+@login_required
+@permission_required('blog.edit_project', raise_exception=True)
 def project_edit(request, id):
     project = get_object_or_404(Project, id=id)
     if request.method == "POST":
@@ -47,6 +53,8 @@ def project_edit(request, id):
     return render(request, 'project/form.html', {'form': form, 'type': 'edit'})
 
 
+@login_required
+@permission_required('blog.add_event', raise_exception=True)
 def event_new(request, id):
     if request.method == "POST":
         form = EventForm(request.POST, request.FILES)
@@ -71,6 +79,8 @@ def event_new(request, id):
     return render(request, 'event/form.html', {'form': form, 'type': 'new'})
 
 
+@login_required
+@permission_required('blog.edit_event', raise_exception=True)
 def event_edit(request, id):
     event = get_object_or_404(Event, id=id)
     if request.method == "POST":
@@ -85,6 +95,7 @@ def event_edit(request, id):
     return render(request, 'event/form.html', {'form': form, 'type': 'edit'})
 
 
+@login_required
 def event_details(request, id, dir_id=None):
     event = Event.objects.get(id=id)
 
@@ -101,6 +112,8 @@ def event_details(request, id, dir_id=None):
     return render(request, "event/details.html", context)
 
 
+@login_required
+@permission_required('blog.add_directory', raise_exception=True)
 def directory_new(request, event_id, parent_dir_id):
     event = get_object_or_404(Event, id=event_id)
     parent_dir = get_object_or_404(Directory, id=parent_dir_id)
@@ -121,6 +134,8 @@ def directory_new(request, event_id, parent_dir_id):
     return render(request, 'directory/form.html', {'form': form, 'type': 'new'})
 
 
+@login_required
+@permission_required('blog.add_file', raise_exception=True)
 def file_new(request, dir_id):
     directory = get_object_or_404(Directory, id=dir_id)
     if request.method == "POST":
@@ -138,6 +153,8 @@ def file_new(request, dir_id):
     return JsonResponse({'status': 'error'})
 
 
+@login_required
+@permission_required('blog.delete_file', raise_exception=True)
 def file_remove(request, id):
     file = get_object_or_404(File, id=id)
     dir_id = file.parent_dir.id
@@ -148,6 +165,7 @@ def file_remove(request, id):
     return redirect('dir_details', id=event_id, dir_id=dir_id)
 
 
+@login_required
 def projects_list(request):
     projects = Project.objects.all()
     context = {

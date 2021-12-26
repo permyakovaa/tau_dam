@@ -1,0 +1,27 @@
+{% extends "base_template.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<main class="form-signin">
+
+    {% if form.errors %}
+        <p>{{ _("Your username and password didn't match. Please try again.") }}</p>
+    {% endif %}
+
+    {% if next %}
+          {% if user.is_authenticated %}
+                <p>{{ _("Your account doesn't have access to this page. To proceed, please login with an account that has access.") }}</p>
+          {% else %}
+                <p>{{ _('Please login to see this page.') }}</p>
+          {% endif %}
+    {% endif %}
+    <form method="post" action="{% url 'login' %}">
+
+        {% csrf_token %}
+        <h1 class="h3 mb-3 fw-normal">{{ _('Please sign in') }}</h1>
+
+        {{ form | crispy }}
+
+        <button class="w-100 btn btn-lg btn-primary" type="submit">{{ _('Sign in') }}</button>
+    </form>
+</main>
+{% endblock %}

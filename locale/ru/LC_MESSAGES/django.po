@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-26 15:09+0000\n"
+"POT-Creation-Date: 2021-12-26 16:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,7 +28,7 @@ msgstr "Русский"
 msgid "English"
 msgstr "Английский"
 
-#: blog/forms.py:12 blog/forms.py:24 blog/forms.py:37
+#: blog/forms.py:12 blog/forms.py:24 blog/forms.py:36
 msgid "Title"
 msgstr "Название"
 
@@ -39,10 +39,6 @@ msgstr "Описание"
 #: blog/forms.py:14 blog/forms.py:26
 msgid "Thumbnail"
 msgstr "Превью"
-
-#: blog/forms.py:27
-msgid "Project"
-msgstr "Проект"
 
 #: blog/templates/base_template.html:60
 msgid "Back to top"
@@ -110,6 +106,25 @@ msgstr "Добавить новый проект"
 #: blog/templates/project/form.html:11
 msgid "Edit project"
 msgstr "Редактировать проект"
+
+#: blog/templates/registration/login.html:14
+msgid "Please login to see this page."
+msgstr "Для просмотра страницы необходима авторизация"
+
+#: blog/templates/registration/login.html:20
+msgid "Please sign in"
+msgstr "Пожалуйста, авторизуйтесь"
+
+#: blog/templates/registration/login.html:24
+msgid "Sign in"
+msgstr "Авторизация"
+
+#: blog/templates/registration/login.html:7
+msgid "Your account doesn't have access to this page. To proceed, please login with an account that has access."
+msgstr "У вашего аккаунта нет доступа к этой странице."
+
+#~ msgid "Project"
+#~ msgstr "Проект"
 
 #~ msgid "Created At"
 #~ msgstr "Дата создания"

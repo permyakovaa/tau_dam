@@ -145,3 +145,6 @@ LANGUAGES = (
     ('ru', ugettext('Russian')),
     ('en', ugettext('English')),
 )
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/accounts/login/'
