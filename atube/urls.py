@@ -21,4 +21,5 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('blog.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
 ] + static(settings.UPLOADS_URL, document_root=settings.UPLOADS_ROOT)
