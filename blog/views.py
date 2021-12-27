@@ -155,8 +155,26 @@ def add_file(request, dir_id):
 
 
 @login_required
+@permission_required('blog.delete_directory', raise_exception=True)
+def delete_directory(request, id):
+    directory = get_object_or_404(Directory, id=id)
+    dir_id = directory.parent_dir.id
+    event_id = directory.parent_dir.event.id
+
+    for child_dir in directory.child_dirs.all():
+        child_dir.delete()
+
+    for file in directory.files.all():
+        file.delete()
+
+    directory.delete()
+
+    return redirect('dir_details', id=event_id, dir_id=dir_id)
+
+
+@login_required
 @permission_required('blog.delete_file', raise_exception=True)
-def file_remove(request, id):
+def delete_file(request, id):
     file = get_object_or_404(File, id=id)
     dir_id = file.parent_dir.id
     event_id = file.parent_dir.event.id

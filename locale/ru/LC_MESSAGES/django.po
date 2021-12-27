@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-26 16:44+0000\n"
+"POT-Creation-Date: 2021-12-27 07:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -40,11 +40,11 @@ msgstr "Описание"
 msgid "Thumbnail"
 msgstr "Превью"
 
-#: blog/templates/base_template.html:60
+#: blog/templates/base_template.html:58
 msgid "Back to top"
 msgstr "Наверх"
 
-#: blog/templates/directory/form.html:9 blog/templates/event/details.html:12
+#: blog/templates/directory/form.html:9 blog/templates/event/details.html:13
 msgid "Add new directory"
 msgstr "Добавить новую директорию"
 
@@ -61,25 +61,33 @@ msgstr "Сохранить"
 msgid "Event"
 msgstr "Событие"
 
-#: blog/templates/event/details.html:21
+#: blog/templates/event/details.html:25
 msgid "Drag and drop files to this area"
 msgstr ""
 "Загрузите файлы с помощью диалога выбора файлов или перетащив нужные "
 "изображения в выделенную область"
 
-#: blog/templates/event/details.html:23
+#: blog/templates/event/details.html:27
 msgid "Select files"
 msgstr "Выберите файлы"
 
-#: blog/templates/event/details.html:70
+#: blog/templates/event/details.html:76
 msgid "Directory is empty"
 msgstr "Директория пуста"
 
-#: blog/templates/event/details.html:84
+#: blog/templates/event/details.html:90 blog/templates/event/details.html:103
 msgid "Close"
 msgstr "Закрыть"
 
-#: blog/templates/event/form.html:9 blog/templates/project/details.html:6
+#: blog/templates/event/details.html:100
+msgid "Are you sure you want to delete object?"
+msgstr "Вы уверены, что хотите удалить объект?"
+
+#: blog/templates/event/details.html:104 blog/templates/event/details.html:111
+msgid "Delete"
+msgstr "Удалить"
+
+#: blog/templates/event/form.html:9 blog/templates/project/details.html:10
 msgid "Add new event"
 msgstr "Добавить новое событие"
 
@@ -87,25 +95,39 @@ msgstr "Добавить новое событие"
 msgid "Edit event"
 msgstr "Редактировать событие"
 
-#: blog/templates/project/details.html:5
+#: blog/templates/project/details.html:6
 msgid "Events"
 msgstr "События"
 
-#: blog/templates/project/details.html:26 blog/templates/project/list.html:24
+#: blog/templates/project/details.html:31 blog/templates/project/list.html:26
 msgid "View"
 msgstr "Просмотр"
 
-#: blog/templates/project/details.html:27 blog/templates/project/list.html:25
+#: blog/templates/project/details.html:33 blog/templates/project/list.html:28
 msgid "Edit"
 msgstr "Редактирование"
 
-#: blog/templates/project/form.html:9 blog/templates/project/list.html:6
+#: blog/templates/project/form.html:9 blog/templates/project/list.html:7
 msgid "Add new project"
 msgstr "Добавить новый проект"
 
 #: blog/templates/project/form.html:11
 msgid "Edit project"
 msgstr "Редактировать проект"
+
+#: blog/templates/registration/logged_out.html:7
+msgid "Click here to login again."
+msgstr "Нажмите тут для повторной авторизации"
+
+#: blog/templates/registration/login.html:7
+msgid "Your username and password didn't match. Please try again."
+msgstr ""
+"Имя пользователя или пароль не совпадают. Пожалуйста попробуйте еще раз."
+
+#: blog/templates/registration/login.html:12
+msgid "Your account doesn't have access to this page. To proceed, please login with "
+"an account that has access."
+msgstr "У вашего аккаунта нет доступа к этой странице."
 
 #: blog/templates/registration/login.html:14
 msgid "Please login to see this page."
@@ -118,10 +140,6 @@ msgstr "Пожалуйста, авторизуйтесь"
 #: blog/templates/registration/login.html:24
 msgid "Sign in"
 msgstr "Авторизация"
-
-#: blog/templates/registration/login.html:7
-msgid "Your account doesn't have access to this page. To proceed, please login with an account that has access."
-msgstr "У вашего аккаунта нет доступа к этой странице."
 
 #~ msgid "Project"
 #~ msgstr "Проект"

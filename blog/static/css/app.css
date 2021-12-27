@@ -59,16 +59,16 @@
 #fileElem {
     display: none;
 }
-.remove-file {
+.delete-file {
     display: none;
 }
-.file-row:hover .remove-file {
+.file-row:hover .delete-file {
     display: initial;
 }
-.remove-file:hover svg {
+.delete-file:hover svg {
     fill: #555;
 }
-.remove-file:hover svg {
+.delete-file:hover svg {
     fill: #555;
 }
 .form-signin {
@@ -76,4 +76,18 @@
     max-width: 330px;
     padding: 15px;
     margin: auto;
+}
+.context-menu {
+    position: absolute;
+    display: none;
+}
+.context-menu a {
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    background: #3a3a3a;
+}
+.context-menu a:hover {
+    background: #1a1a1a;
+    text-decoration: none;
 }
