@@ -34,7 +34,10 @@
 {% endblock %}
 {% block content %}
     {% for dir in current_dir.child_dirs.all %}
-        <a href="{% url 'dir_details' event.id dir.id %}" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 file-row">
+        <a href="{% url 'dir_details' event.id dir.id %}"
+            class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 file-row"
+            data-delete-url="{% url 'delete_directory' dir.id %}"
+        >
             <div class="col-xl-1">
                   {% bs_icon 'folder' size='4em' color='orange' %}
             </div>
@@ -47,7 +50,8 @@
         </a>
     {% endfor %}
     {% for file in current_dir.files.all %}
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 file-row">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 file-row"
+            data-delete-url="{% url 'delete_file' file.id %}">
             <div class="col-xl-1">
                 {% if file.is_image %}
                     <img src="{{file.file.url}}" class="file-image-preview" style="width:75px;"
@@ -56,7 +60,7 @@
                     {% bs_icon 'card-image' size='4em'%}
                 {% endif %}
             </div>
-            <div class="col-xl-7">
+            <div class="col-xl-8">
                 {{ file.title }}
             </div>
             <div class="col-xl-1">
@@ -65,11 +69,6 @@
             <div class="col-xl-2">
                 {{ file.created_at }}
             </div>
-            {% if perms.blog.delete_file %}
-                <div class="col-xl-1">
-                    <a href="{% url 'file_remove' file.id %}" class="remove-file">{% bs_icon 'x-circle-fill' color='#999' size='3em'%}</a>
-                </div>
-            {% endif %}
         </div>
     {% endfor %}
 
@@ -93,11 +92,33 @@
                 </div>
           </div>
     </div>
-    <script type="text/javascript">
-        let url = '{% url 'add_file' current_dir.id %}';
-        let csrf_token = '{{ csrf_token }}'
-    </script>
+    <!-- Modal -->
+    <div class="modal fade" id="confirmDeleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body">
+             {{ _('Are you sure you want to delete object?') }}
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ _('Close') }}</button>
+            <a href="" class="btn btn-primary confirm-delete">{{ _('Delete') }}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="context-menu">
+        <a href="#" id="delete-action" data-bs-toggle="modal"
+           data-bs-target="#confirmDeleteModal">{{ _('Delete') }}</a>
+    </div>
     <script type="text/javascript" src="{% static 'js/dragndrop-file-load.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/vendor/cash.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/preview-images.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/context-menu.js' %}"></script>
+
+    <script type="text/javascript">
+        let url = '{% url 'add_file' current_dir.id %}';
+        let csrf_token = '{{ csrf_token }}'
+        let delete_file = '{{ perms.blog.delete_file }}'
+        let delete_directory = '{{ perms.blog.delete_directory }}'
+    </script>
 {% endblock %}
