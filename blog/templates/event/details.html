@@ -38,13 +38,13 @@
             class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 file-row"
             data-delete-url="{% url 'delete_directory' dir.id %}"
         >
-            <div class="col-xl-1">
+            <div class="col-xl-1 col-sm-3 col-md-2">
                   {% bs_icon 'folder' size='4em' color='orange' %}
             </div>
-            <div class="col-xl-9">
+            <div class="col-xl-9 col-sm-5 col-md-6">
                   {{ dir.title }}
             </div>
-            <div class="col-xl-2">
+            <div class="col-xl-2 col-sm-4 col-md-4">
                   {{ dir.created_at }}
             </div>
         </a>
@@ -52,7 +52,7 @@
     {% for file in current_dir.files.all %}
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 file-row"
             data-delete-url="{% url 'delete_file' file.id %}">
-            <div class="col-xl-1">
+            <div class="col-xl-1 col-sm-3 col-md-2">
                 {% if file.is_image %}
                     <img src="{{file.file.url}}" class="file-image-preview" style="width:75px;"
                          data-bs-toggle="modal" data-bs-target="#previewImageModel" data-title="{{file.title}}" />
@@ -60,13 +60,13 @@
                     {% bs_icon 'card-image' size='4em'%}
                 {% endif %}
             </div>
-            <div class="col-xl-8">
+            <div class="col-xl-8 col-sm-3 col-md-4">
                 {{ file.title }}
             </div>
-            <div class="col-xl-1">
+            <div class="col-xl-1 col-sm-2 col-md-2">
                 {{ file.size | filesizeformat }}
             </div>
-            <div class="col-xl-2">
+            <div class="col-xl-2 col-sm-4 col-md-4">
                 {{ file.created_at }}
             </div>
         </div>
