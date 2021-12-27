@@ -33,6 +33,8 @@ function handleFiles(files) {
       initializeProgress(files.length)
       files.forEach(uploadFile)
       files.forEach(previewFile)
+
+      location.reload();
 }
 
 function uploadFile(file, i) {
@@ -67,7 +69,7 @@ function previewFile(file) {
 function initializeProgress(numFiles) {
       progressBar.value = 0
       uploadProgress = []
-      for(let i = numFiles; i > 0; i--) {
+      for (let i = numFiles; i > 0; i--) {
             uploadProgress.push(0)
       }
 }
