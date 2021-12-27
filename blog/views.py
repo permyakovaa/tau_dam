@@ -65,12 +65,12 @@ def event_new(request, id):
             directory = Directory()
             directory.owner = request.user
             directory.created_at = timezone.now()
-            directory.event = event
 
             event.owner = request.user
             event.created_at = timezone.now()
             event.project = project
             event.save()
+            directory.event = event
             directory.save()
             return redirect('event_details', id=event.pk)
     else:

@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-!$n8f%36)d#8s(m6gv_8hbaa2m0j72d!%vpwmj6ky&yh$-^6lg
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['178.46.167.190']
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
@@ -126,7 +126,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
+MEDIA_URL = '/uploads/'
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+MEDIA_ROOT = os.path.join(BASE_DIR, "uploads/")
+STATICFILES_DIR = [
+   os.path.join(BASE_DIR, 'static')
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
