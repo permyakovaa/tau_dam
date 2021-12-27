@@ -6,12 +6,18 @@
 ```bash
 $ git clone https://gitlab.npo-at.com/backoffice/media-server
 ```
-2. Установить зависимости python
+2. Установить зависимости mysql
+```bash
+$ sudo apt install mysql-server
+$ sudo apt-get install libmysqlclient-dev
+```
+3. Установить зависимости python
 ```bash
 $ pip3 install mysqlclient
 $ pip3 install django-bootstrap-icons
 $ pip3 install django-crispy-forms
 $ pip3 install crispy-bootstrap5
+$ pip3 install django-bootstrap-v5
 ```
 3. Указать настройки mysl
 ```bash
@@ -36,7 +42,7 @@ $ python3 manage.py migrate
 ```
 5. Запуск сервера
 ```bash
-$ python3 manage.pu runserver
+$ python3 manage.py runserver
 ```
 
 6. Создать супер юзера для админки
@@ -45,3 +51,8 @@ $ python3 manage.py createsuperuser
 ```
 
 7. Залогиниться в админке /admin
+
+# Для развертки production сервера:
+1. pip3 install uwsgi
+2. sudo apt install uwsgi-plugin-python3
+3. sudo apt-get install nginx

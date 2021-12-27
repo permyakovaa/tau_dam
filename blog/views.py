@@ -65,7 +65,6 @@ def event_new(request, id):
             directory = Directory()
             directory.owner = request.user
             directory.created_at = timezone.now()
-            directory.event = event
 
             event.owner = request.user
             event.created_at = timezone.now()
