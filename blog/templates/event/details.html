@@ -54,8 +54,12 @@
             data-delete-url="{% url 'delete_file' file.id %}">
             <div class="col-xl-1 col-sm-3 col-md-2">
                 {% if file.is_image %}
-                    <img src="{{file.file.url}}" class="file-image-preview" style="width:75px;"
+                    <img src="{{file.file.url}}" class="file-image-preview" style="width:95px;"
                          data-bs-toggle="modal" data-bs-target="#previewImageModel" data-title="{{file.title}}" />
+                {% elif file.is_video %}
+                    <video src="{{file.file.url}}" class="video-image-preview" width="95px;" poster="{% static 'images/default_thumb.png' %}"
+                        data-bs-toggle="modal" data-bs-target="#previewImageModel" preload="none" data-title="{{file.title}}"
+                    ></video>
                 {% else %}
                     {% bs_icon 'card-image' size='4em'%}
                 {% endif %}

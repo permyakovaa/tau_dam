@@ -60,5 +60,8 @@ class File(models.Model):
     def is_image(self):
         return self.extension() in ['.png', '.jpeg', '.jpg']
 
+    def is_video(self):
+        return self.extension() in ['.mp4', '.avi', '.webm']
+
     def __str__(self):
         return self.title
