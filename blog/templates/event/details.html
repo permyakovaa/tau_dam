@@ -36,6 +36,7 @@
             <a href="{% url 'dir_details' event.id dir.id %}"
                 class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 file-row"
                 data-delete-url="{% url 'delete_directory' dir.id %}"
+                data-rename-url="{% url 'change_directory' dir.id %}"
             >
                 <div class="col-xl-1 col-sm-3 col-md-2">
                       {% bs_icon 'folder' size='4em' color='orange' %}
@@ -90,9 +91,6 @@
                       <div class="modal-body">
                             <img src="" width="100%"/>
                       </div>
-                      <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ _('Close') }}</button>
-                      </div>
                 </div>
           </div>
     </div>
@@ -111,6 +109,7 @@
       </div>
     </div>
     <div class="context-menu">
+        <a href="#" id="rename-action">{{ _('Rename') }}</a>
         <a href="#" id="delete-action" data-bs-toggle="modal"
            data-bs-target="#confirmDeleteModal">{{ _('Delete') }}</a>
     </div>

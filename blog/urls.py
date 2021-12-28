@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import project_details, project_new, project_edit, projects_list, event_details
-from .views import event_new, event_edit, directory_new, add_file, delete_file, delete_directory
+from .views import event_new, event_edit, directory_new, change_directory, delete_directory, add_file, delete_file
 
 urlpatterns = [
     path('', projects_list),
@@ -12,6 +12,7 @@ urlpatterns = [
     path('event/<int:id>/dir/<int:dir_id>', event_details, name='dir_details'),
     path('event/<int:id>', event_details, name='event_details'),
     path('directory/new/<int:event_id>/<int:parent_dir_id>', directory_new, name='directory_new'),
+    path('directory/change/<int:id>', change_directory, name='change_directory'),
     path('directory/<int:dir_id>/add_file/', add_file, name='add_file'),
     path('directory/<int:id>/delete/', delete_directory, name='delete_directory'),
     path('file/<int:id>/delete/', delete_file, name='delete_file'),
