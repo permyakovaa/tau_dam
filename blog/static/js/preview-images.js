@@ -1,10 +1,19 @@
 $(function () {
     $('.file-image-preview').on('click', function() {
         let previewModal = $('#previewImageModel');
+        previewModal.find('.modal-body').html('<img width="100%"/>')
         $(this).parent().parent().addClass('current-row');
-        previewModal.find('.modal-body img').attr('src', $(this).attr('src'));
+        previewModal.find('.modal-body img').attr('src',  $(this).attr('src'));
         previewModal.find('.modal-title').text($(this).data('title'))
     });
+
+    $('.video-image-preview').on('click', function() {
+        let previewModal = $('#previewImageModel');
+        previewModal.find('.modal-body').html('<video width="100%" controls></video>')
+        previewModal.find('.modal-body video').attr('src', $(this).attr('src'));
+        previewModal.find('.modal-title').text($(this).data('title'))
+    });
+
     $('body').on("keyup", function(e) {
          let previewImg;
          if (e.which === 37) {
