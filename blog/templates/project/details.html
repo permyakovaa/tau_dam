@@ -20,7 +20,7 @@
                     <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
                         <title>{{ event }}</title>
                         <rect width="100%" height="100%" fill="#ccc"></rect>
-                        <image href="/{{ event.thumbnail }}" width="100%"/>
+                        <image href="{{ event.thumbnail.url }}" width="100%"/>
                     </svg>
 
                     <div class="card-body">
@@ -28,7 +28,7 @@
                           <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
                                     <a href="{% url 'event_details' event.id %}" class="btn btn-sm btn-outline-secondary">{{ _('View') }}</a>
-                                    {% if perms.blog.edit_event %}
+                                    {% if perms.blog.change_event %}
                                         <a href="{% url 'event_edit' event.id %}" class="btn btn-sm btn-outline-secondary">{{ _('Edit') }}</a>
                                     {% endif %}
                                 </div>
