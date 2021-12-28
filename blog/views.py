@@ -38,7 +38,7 @@ def project_new(request):
 
 
 @login_required
-@permission_required('blog.edit_project', raise_exception=True)
+@permission_required('blog.change_project', raise_exception=True)
 def project_edit(request, id):
     project = get_object_or_404(Project, id=id)
     if request.method == "POST":
@@ -80,7 +80,7 @@ def event_new(request, id):
 
 
 @login_required
-@permission_required('blog.edit_event', raise_exception=True)
+@permission_required('blog.change_event', raise_exception=True)
 def event_edit(request, id):
     event = get_object_or_404(Event, id=id)
     if request.method == "POST":
