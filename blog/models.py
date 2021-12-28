@@ -4,7 +4,7 @@ from django.db import models
 
 
 def file_path_dir(instance, filename):
-    return 'uploads/project/{0}/{1}'.format(instance.parent_dir.id, filename)
+    return 'project/{0}/{1}'.format(instance.parent_dir.id, filename)
 
 
 class Project(models.Model):
@@ -12,7 +12,7 @@ class Project(models.Model):
     title = models.CharField(max_length=50)
     description = models.TextField()
     created_at = models.DateTimeField()
-    thumbnail = models.FileField(upload_to='uploads/project/preview/')
+    thumbnail = models.FileField(upload_to='project/preview/')
     owner = models.ForeignKey(User, on_delete=models.PROTECT)
 
     def __str__(self):
@@ -24,7 +24,7 @@ class Event(models.Model):
     title = models.CharField(max_length=50)
     description = models.TextField()
     created_at = models.DateTimeField()
-    thumbnail = models.FileField(upload_to='uploads/project/preview/')
+    thumbnail = models.FileField(upload_to='project/preview/')
     project = models.ForeignKey(Project, on_delete=models.PROTECT)
     owner = models.ForeignKey(User, on_delete=models.PROTECT)
 

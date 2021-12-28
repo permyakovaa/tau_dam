@@ -115,11 +115,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
 LANGUAGE_CODE = 'ru-ru'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_TZ = True
 
 
@@ -128,8 +125,10 @@ USE_TZ = True
 
 MEDIA_URL = '/uploads/'
 STATIC_URL = '/static/'
+UPLOADS_URL = '/uploads/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
-MEDIA_ROOT = os.path.join(BASE_DIR, "")
+MEDIA_ROOT = os.path.join(BASE_DIR, "uploads/")
+UPLOADS_ROOT = os.path.join(BASE_DIR, "uploads/")
 
 STATICFILES_DIR = [
    os.path.join(BASE_DIR, 'static')
@@ -140,9 +139,6 @@ STATICFILES_DIR = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-UPLOADS_ROOT = os.path.join(BASE_DIR, 'uploads')
-UPLOADS_URL = '/uploads/'
-
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale/'),
 )
@@ -150,7 +146,6 @@ LOCALE_PATHS = (
 ugettext = lambda s: s
 LANGUAGES = (
     ('ru', ugettext('Russian')),
-    ('en', ugettext('English')),
 )
 
 LOGIN_REDIRECT_URL = '/'

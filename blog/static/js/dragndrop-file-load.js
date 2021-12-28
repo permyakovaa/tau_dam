@@ -43,24 +43,27 @@ function uploadFile(file, i, array) {
       xhr.open('POST', url, true)
 
       xhr.upload.addEventListener("progress", function(e) {
-        updateProgress(i, (e.loaded * 100.0 / e.total) || 100)
+            let p = (e.loaded * 100.0 / e.total) || 100;
+            updateProgress(i, p || 100);
+
+            if (p == 100) {
+                window.items_cnt++;
+            }
+            if (window.items_cnt === array.length && p == 100)  {
+                location.reload();
+            }
       })
       xhr.addEventListener('readystatechange', function(e) {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-          // Готово. Сообщаем пользователю
-        }
-        else if (xhr.readyState == 4 && xhr.status != 200) {
-          // Ошибка. Сообщаем пользователю
-        }
+            if (xhr.readyState == 4 && xhr.status == 200) {
+              // Готово. Сообщаем пользователю
+            }
+            else if (xhr.readyState == 4 && xhr.status != 200) {
+              // Ошибка. Сообщаем пользователю
+            }
       })
       formData.append('file', file)
       formData.append('csrfmiddlewaretoken', csrf_token)
-      xhr.send(formData)
-
-      window.items_cnt++;
-      if (window.items_cnt === array.length) {
-            location.reload();
-      }
+      xhr.send(formData);
 }
 function previewFile(file) {
       let reader = new FileReader()
