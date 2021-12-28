@@ -3,18 +3,16 @@
 {% load static %}
 
 {% block title %}
-    <div class="col-xl-12">
-        <div class="actions float-start">
-            <h1 class="bd-title mt-0">{{ _('Event') }}: {{event.title}}</h1>
-            <p class="bd-lead">{{event.description}}</p>
-        </div>
-        <div class="actions float-end">
-            {% if perms.blog.add_directory %}
-                <a href="{% url 'directory_new' event.id current_dir.id %}" class="btn btn-primary my-2">{{ _('Add new directory') }}</a>
-            {% endif %}
-        </div>
+    <div class="col-xl-10 col-lg-6 col-md-6 col-sm-6">
+        <h1 class="bd-title mt-0">{{ _('Event') }}: {{event.title}}</h1>
+        <p class="bd-lead">{{event.description}}</p>
     </div>
-    <div class="col-xl-12">
+    <div class="col-xl-2 col-lg-6 col-md-6 col-sm-6">
+        {% if perms.blog.add_directory %}
+            <a href="{% url 'directory_new' event.id current_dir.id %}" class="btn btn-primary my-2 float-end">{{ _('Add new directory') }}</a>
+        {% endif %}
+    </div>
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
         {% if current_dir.parent_dir is not empty %}
             <a href="{% url 'dir_details' event.id current_dir.parent_dir.id %}"  class="navigation-link">{% bs_icon 'arrow-left' size='1.5em' color='grey' %} {{current_dir.parent_dir.title}}</a>
         {% endif %}
@@ -34,20 +32,22 @@
 {% endblock %}
 {% block content %}
     {% for dir in current_dir.child_dirs.all %}
-        <a href="{% url 'dir_details' event.id dir.id %}"
-            class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 file-row"
-            data-delete-url="{% url 'delete_directory' dir.id %}"
-        >
-            <div class="col-xl-1 col-sm-3 col-md-2">
-                  {% bs_icon 'folder' size='4em' color='orange' %}
-            </div>
-            <div class="col-xl-9 col-sm-5 col-md-6">
-                  {{ dir.title }}
-            </div>
-            <div class="col-xl-2 col-sm-4 col-md-4">
-                  {{ dir.created_at }}
-            </div>
-        </a>
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+            <a href="{% url 'dir_details' event.id dir.id %}"
+                class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 file-row"
+                data-delete-url="{% url 'delete_directory' dir.id %}"
+            >
+                <div class="col-xl-1 col-sm-3 col-md-2">
+                      {% bs_icon 'folder' size='4em' color='orange' %}
+                </div>
+                <div class="col-xl-9 col-sm-5 col-md-6">
+                      {{ dir.title }}
+                </div>
+                <div class="col-xl-2 col-sm-4 col-md-4">
+                      {{ dir.created_at }}
+                </div>
+            </a>
+        </div>
     {% endfor %}
     {% for file in current_dir.files.all %}
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 file-row"

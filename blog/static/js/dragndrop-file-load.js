@@ -31,13 +31,13 @@ function handleDrop(e) {
 function handleFiles(files) {
       files = [...files]
       initializeProgress(files.length)
-      files.forEach(uploadFile)
-      files.forEach(previewFile)
 
-      location.reload();
+      window.items_cnt = 0;
+      files.forEach(uploadFile)
+      files.forEach(previewFile, function() {alert('done')})
 }
 
-function uploadFile(file, i) {
+function uploadFile(file, i, array) {
       var xhr = new XMLHttpRequest()
       var formData = new FormData()
       xhr.open('POST', url, true)
@@ -56,6 +56,11 @@ function uploadFile(file, i) {
       formData.append('file', file)
       formData.append('csrfmiddlewaretoken', csrf_token)
       xhr.send(formData)
+
+      window.items_cnt++;
+      if (window.items_cnt === array.length) {
+            location.reload();
+      }
 }
 function previewFile(file) {
       let reader = new FileReader()
