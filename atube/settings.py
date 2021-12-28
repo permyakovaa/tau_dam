@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-!$n8f%36)d#8s(m6gv_8hbaa2m0j72d!%vpwmj6ky&yh$-^6lg
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['178.46.167.190']
+ALLOWED_HOSTS = ['178.46.167.190', '127.0.0.1']
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
@@ -130,6 +130,7 @@ MEDIA_URL = '/uploads/'
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 MEDIA_ROOT = os.path.join(BASE_DIR, "uploads/")
+
 STATICFILES_DIR = [
    os.path.join(BASE_DIR, 'static')
 ]
