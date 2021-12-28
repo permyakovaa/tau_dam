@@ -14,10 +14,15 @@
     </div>
 {% endblock %}
 {% block content %}
-    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-        <form method="POST" class="event-form col-xl-12" enctype="multipart/form-data">{% csrf_token %}
-            {{ form | crispy }}
-            <button type="submit" class="save btn btn-primary my-2 float-end">{{ _('Save') }}</button>
-        </form>
-    </div>
+    <form method="POST" class="event-form col-xl-12" enctype="multipart/form-data">{% csrf_token %}
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">{{ form | crispy }}</div>
+        </div>
+        <div class="row">
+            <div class="col-xl-10 col-lg-10 col-md-9 col-sm-6"></div>
+            <div class="col-xl-2 col-lg-2 col-md-3 col-sm-6" style="text-align: right;">
+                <button type="submit" class="save btn btn-primary my-2 m-r-1">{{ _('Save') }}</button>
+            </div>
+        </div>
+    </form>
 {% endblock %}

@@ -135,6 +135,22 @@ def directory_new(request, event_id, parent_dir_id):
 
 
 @login_required
+@permission_required('blog.change_directory', raise_exception=True)
+def change_directory(request, id):
+    directory = get_object_or_404(Directory, id=id)
+    if request.method == "POST":
+        form = DirectoryForm(request.POST, request.FILES, instance=directory)
+        if form.is_valid():
+            directory = form.save(commit=False)
+            directory.save()
+            return redirect('dir_details', id=directory.parent_dir.event.pk, dir_id=directory.parent_dir.id)
+    else:
+        form = DirectoryForm(instance=directory)
+
+    return render(request, 'directory/form.html', {'form': form, 'type': 'edit'})
+
+
+@login_required
 @permission_required('blog.add_file', raise_exception=True)
 def add_file(request, dir_id):
     directory = get_object_or_404(Directory, id=dir_id)

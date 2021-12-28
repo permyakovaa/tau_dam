@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-27 07:08+0000\n"
+"POT-Creation-Date: 2021-12-28 15:41+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,13 +20,9 @@ msgstr ""
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: atube/settings.py:145
+#: atube/settings.py:148
 msgid "Russian"
 msgstr "Русский"
-
-#: atube/settings.py:146
-msgid "English"
-msgstr "Английский"
 
 #: blog/forms.py:12 blog/forms.py:24 blog/forms.py:36
 msgid "Title"
@@ -40,11 +36,11 @@ msgstr "Описание"
 msgid "Thumbnail"
 msgstr "Превью"
 
-#: blog/templates/base_template.html:58
+#: blog/templates/base_template.html:60
 msgid "Back to top"
 msgstr "Наверх"
 
-#: blog/templates/directory/form.html:9 blog/templates/event/details.html:13
+#: blog/templates/directory/form.html:9 blog/templates/event/details.html:12
 msgid "Add new directory"
 msgstr "Добавить новую директорию"
 
@@ -52,40 +48,44 @@ msgstr "Добавить новую директорию"
 msgid "Edit directory"
 msgstr "Редактировать директорию"
 
-#: blog/templates/directory/form.html:20 blog/templates/event/form.html:20
-#: blog/templates/project/form.html:20
+#: blog/templates/directory/form.html:24 blog/templates/event/form.html:24
+#: blog/templates/project/form.html:24
 msgid "Save"
 msgstr "Сохранить"
 
-#: blog/templates/event/details.html:8
+#: blog/templates/event/details.html:7
 msgid "Event"
 msgstr "Событие"
 
-#: blog/templates/event/details.html:25
+#: blog/templates/event/details.html:23
 msgid "Drag and drop files to this area"
 msgstr ""
 "Загрузите файлы с помощью диалога выбора файлов или перетащив нужные "
 "изображения в выделенную область"
 
-#: blog/templates/event/details.html:27
+#: blog/templates/event/details.html:25
 msgid "Select files"
 msgstr "Выберите файлы"
 
-#: blog/templates/event/details.html:76
+#: blog/templates/event/details.html:81
 msgid "Directory is empty"
 msgstr "Директория пуста"
 
-#: blog/templates/event/details.html:90 blog/templates/event/details.html:103
+#: blog/templates/event/details.html:95 blog/templates/event/details.html:108
 msgid "Close"
 msgstr "Закрыть"
 
-#: blog/templates/event/details.html:100
+#: blog/templates/event/details.html:105
 msgid "Are you sure you want to delete object?"
 msgstr "Вы уверены, что хотите удалить объект?"
 
-#: blog/templates/event/details.html:104 blog/templates/event/details.html:111
+#: blog/templates/event/details.html:109 blog/templates/event/details.html:117
 msgid "Delete"
 msgstr "Удалить"
+
+#: blog/templates/event/details.html:115
+msgid "Rename"
+msgstr "Переименовать"
 
 #: blog/templates/event/form.html:9 blog/templates/project/details.html:10
 msgid "Add new event"
@@ -95,19 +95,19 @@ msgstr "Добавить новое событие"
 msgid "Edit event"
 msgstr "Редактировать событие"
 
-#: blog/templates/project/details.html:6
+#: blog/templates/project/details.html:5
 msgid "Events"
 msgstr "События"
 
-#: blog/templates/project/details.html:31 blog/templates/project/list.html:26
+#: blog/templates/project/details.html:30 blog/templates/project/list.html:29
 msgid "View"
 msgstr "Просмотр"
 
-#: blog/templates/project/details.html:33 blog/templates/project/list.html:28
+#: blog/templates/project/details.html:32 blog/templates/project/list.html:31
 msgid "Edit"
 msgstr "Редактирование"
 
-#: blog/templates/project/form.html:9 blog/templates/project/list.html:7
+#: blog/templates/project/form.html:9 blog/templates/project/list.html:10
 msgid "Add new project"
 msgstr "Добавить новый проект"
 
@@ -140,6 +140,9 @@ msgstr "Пожалуйста, авторизуйтесь"
 #: blog/templates/registration/login.html:24
 msgid "Sign in"
 msgstr "Авторизация"
+
+#~ msgid "English"
+#~ msgstr "Английский"
 
 #~ msgid "Project"
 #~ msgstr "Проект"
