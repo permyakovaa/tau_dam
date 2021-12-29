@@ -181,7 +181,7 @@ def add_file(request, dir_id):
                 needs_compress = True
                 request = {
                     'file_name': file.file.name,
-                    'preview_file_name': file.name() + '_preview.jpg',
+                    'preview_file_name': file.name() + '_preview' + file.extension(),
                     'tasks': ['image_preview']
                 }
 

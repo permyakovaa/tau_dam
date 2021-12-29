@@ -18,7 +18,6 @@ while True:
     message = socket.recv_json()
 
     message = json.loads(message)
-
     for task in message['tasks']:
         if task == 'video_preview':
             subprocess.call(['ffmpeg', '-y', '-i', UPLOADS_DIR + message['file_name'], '-ss', '00:00:01.000', '-vframes', '1', '-q:v', '10', UPLOADS_DIR + message['preview_file_name'], '-hide_banner', '-loglevel',  'error'])
