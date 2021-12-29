@@ -23,9 +23,9 @@ while True:
         if task == 'video_preview':
             subprocess.call(['ffmpeg', '-y', '-i', UPLOADS_DIR + message['file_name'], '-ss', '00:00:01.000', '-vframes', '1', '-q:v', '10', UPLOADS_DIR + message['preview_file_name'], '-hide_banner', '-loglevel',  'error'])
         elif task == 'video_compressed':
-            subprocess.call(['ffmpeg', '-y', '-i', UPLOADS_DIR + message['file_name'], '-crf', '28', UPLOADS_DIR + message['compressed_video_name']])
+            subprocess.call(['ffmpeg', '-y', '-i', UPLOADS_DIR + message['file_name'], '-crf', '28', UPLOADS_DIR + message['compressed_video_name']], '-hide_banner', '-loglevel',  'error')
         elif task == 'image_preview':
-            subprocess.call(['ffmpeg', '-y', '-i', UPLOADS_DIR + message['file_name'], '-q:v', '30', '-vf', 'scale=320:240', UPLOADS_DIR + message['preview_file_name']])
+            subprocess.call(['ffmpeg', '-y', '-i', UPLOADS_DIR + message['file_name'], '-q:v', '30', '-vf', 'scale=if(gte(a\,320/240)\,min(320\,iw)\,-2):if(gte(a\,320/240)\,-2\,min(240\,ih))', UPLOADS_DIR + message['preview_file_name'], '-hide_banner', '-loglevel',  'error'])
 
     # Send reply back to client
     socket.send_json({"status": "ok", "preview_file_name": message['preview_file_name']})
