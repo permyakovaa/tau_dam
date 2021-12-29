@@ -50,8 +50,7 @@ function uploadFile(file, i, array) {
                 window.items_cnt++;
             }
             if (window.items_cnt === array.length && p == 100)  {
-                sleep(1000);
-                location.reload();
+                setTimeout(() => {location.reload();}, 2000);
             }
       })
       xhr.addEventListener('readystatechange', function(e) {
