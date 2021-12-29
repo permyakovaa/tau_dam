@@ -54,5 +54,10 @@ $ python3 manage.py createsuperuser
 
 # Для развертки production сервера:
 1. pip3 install uwsgi
-2. sudo apt install uwsgi-plugin-python3
 3. sudo apt-get install nginx
+
+# Сервер ffmpeg для компрессии по задачами из загрузки файлов:
+1. sudo apt install ffmpeg
+2. sudo apt install zeromq
+3. pip3 install pyzmq
+4. В корне репо запустить сервер python3 zmq_server.py
