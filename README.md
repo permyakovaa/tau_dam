@@ -58,6 +58,6 @@ $ python3 manage.py createsuperuser
 
 # Сервер ffmpeg для компрессии по задачами из загрузки файлов:
 1. sudo apt install ffmpeg
-2. sudo apt install zeromq
+2. sudo apt install libzmq5
 3. pip3 install pyzmq
 4. В корне репо запустить сервер python3 zmq_server.py
