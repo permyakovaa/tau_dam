@@ -3,7 +3,7 @@ $(function () {
         let previewModal = $('#previewImageModel');
         previewModal.find('.modal-body').html('<img width="100%"/>')
         $(this).parent().parent().addClass('current-row');
-        previewModal.find('.modal-body img').attr('src',  $(this).attr('src'));
+        previewModal.find('.modal-body img').attr('src',  $(this).data('origin'));
         previewModal.find('.modal-title').text($(this).data('title'))
     });
 

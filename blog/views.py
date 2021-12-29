@@ -1,5 +1,8 @@
-from django.shortcuts import render
+import zmq
+import json
+import os
 
+from django.shortcuts import render
 from .models import Project, Event, Directory, File
 from .forms import ProjectForm, EventForm, DirectoryForm, FileForm
 from django.shortcuts import redirect, get_object_or_404
@@ -165,6 +168,31 @@ def add_file(request, dir_id):
             file.size = file.file.size
             file.save()
 
+            needs_compress = False
+            if file.is_video():
+                needs_compress = True
+                request = {
+                    'file_name': file.file.name,
+                    'preview_file_name': file.name() + '_preview.jpg',
+                    'compressed_video_name': file.name() + '_compressed' + file.extension(),
+                    'tasks': ['video_preview', 'video_compressed']
+                }
+            elif file.is_image():
+                needs_compress = True
+                request = {
+                    'file_name': file.file.name,
+                    'preview_file_name': file.name() + '_preview.jpg',
+                    'tasks': ['image_preview']
+                }
+
+            if needs_compress:
+                context = zmq.Context()
+                socket = context.socket(zmq.REQ)
+                socket.connect("tcp://localhost:5555")
+
+                socket.send_json(json.dumps(request))
+                socket.close()
+
             return JsonResponse({'status': 'ok'})
 
     return JsonResponse({'status': 'error'})
@@ -194,6 +222,14 @@ def delete_file(request, id):
     file = get_object_or_404(File, id=id)
     dir_id = file.parent_dir.id
     event_id = file.parent_dir.event.id
+
+    try:
+        os.unlink(file.file.path)
+        name, extension = os.path.splitext(file.file.path)
+        os.unlink(name + '_preview' + extension)
+        os.unlink(name + '_compressed' + extension)
+    except FileNotFoundError:
+        pass
 
     file.delete()
 

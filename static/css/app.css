@@ -83,14 +83,12 @@
 }
 .context-menu a {
     color: #fff;
-    padding: 10px 20px;
+    padding: 7px 20px;
     text-decoration: none;
     background: #3a3a3a;
+    display: block;
 }
 .context-menu a:hover {
     background: #1a1a1a;
     text-decoration: none;
-}
-.btn-group {
-    margin-right: 10px;
 }

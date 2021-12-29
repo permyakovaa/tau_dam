@@ -49,6 +49,7 @@ class File(models.Model):
     title = models.CharField(max_length=50)
     created_at = models.DateTimeField()
     file = models.FileField(upload_to=file_path_dir)
+    preview_file = models.FileField(upload_to=file_path_dir, null=True, blank=True)
     size = models.BigIntegerField()
     parent_dir = models.ForeignKey(Directory, on_delete=models.PROTECT, related_name='files')
     owner = models.ForeignKey(User, on_delete=models.PROTECT)
@@ -57,11 +58,15 @@ class File(models.Model):
         name, extension = os.path.splitext(self.file.name)
         return extension
 
+    def name(self):
+        name, extension = os.path.splitext(self.file.name)
+        return name
+
     def is_image(self):
         return self.extension() in ['.png', '.jpeg', '.jpg']
 
     def is_video(self):
-        return self.extension() in ['.mp4', '.avi', '.webm']
+        return self.extension() in ['.mp4', '.avi', '.webm', '.mov']
 
     def __str__(self):
         return self.title

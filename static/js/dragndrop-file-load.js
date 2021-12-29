@@ -31,31 +31,39 @@ function handleDrop(e) {
 function handleFiles(files) {
       files = [...files]
       initializeProgress(files.length)
-      files.forEach(uploadFile)
-      files.forEach(previewFile)
 
-      location.reload();
+      window.items_cnt = 0;
+      files.forEach(uploadFile)
+      files.forEach(previewFile, function() {alert('done')})
 }
 
-function uploadFile(file, i) {
+function uploadFile(file, i, array) {
       var xhr = new XMLHttpRequest()
       var formData = new FormData()
       xhr.open('POST', url, true)
 
       xhr.upload.addEventListener("progress", function(e) {
-        updateProgress(i, (e.loaded * 100.0 / e.total) || 100)
+            let p = (e.loaded * 100.0 / e.total) || 100;
+            updateProgress(i, p || 100);
+
+            if (p == 100) {
+                window.items_cnt++;
+            }
+            if (window.items_cnt === array.length && p == 100)  {
+                location.reload();
+            }
       })
       xhr.addEventListener('readystatechange', function(e) {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-          // Готово. Сообщаем пользователю
-        }
-        else if (xhr.readyState == 4 && xhr.status != 200) {
-          // Ошибка. Сообщаем пользователю
-        }
+            if (xhr.readyState == 4 && xhr.status == 200) {
+              // Готово. Сообщаем пользователю
+            }
+            else if (xhr.readyState == 4 && xhr.status != 200) {
+              // Ошибка. Сообщаем пользователю
+            }
       })
       formData.append('file', file)
       formData.append('csrfmiddlewaretoken', csrf_token)
-      xhr.send(formData)
+      xhr.send(formData);
 }
 function previewFile(file) {
       let reader = new FileReader()
