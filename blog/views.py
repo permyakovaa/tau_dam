@@ -1,5 +1,3 @@
-import zmq
-import json
 import os
 
 from django.shortcuts import render
@@ -166,32 +164,8 @@ def add_file(request, dir_id):
             file.created_at = timezone.now()
             file.parent_dir = directory
             file.size = file.file.size
+            file.preview_compressed = False
             file.save()
-
-            needs_compress = False
-            if file.is_video():
-                needs_compress = True
-                request = {
-                    'file_name': file.file.name,
-                    'preview_file_name': file.name() + '_preview.jpg',
-                    'compressed_video_name': file.name() + '_compressed' + file.extension(),
-                    'tasks': ['video_preview', 'video_compressed']
-                }
-            elif file.is_image():
-                needs_compress = True
-                request = {
-                    'file_name': file.file.name,
-                    'preview_file_name': file.name() + '_preview' + file.extension(),
-                    'tasks': ['image_preview']
-                }
-
-            if needs_compress:
-                context = zmq.Context()
-                socket = context.socket(zmq.REQ)
-                socket.connect("tcp://localhost:5555")
-
-                socket.send_json(json.dumps(request))
-                socket.close()
 
             return JsonResponse({'status': 'ok'})
 

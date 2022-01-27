@@ -50,6 +50,7 @@ class File(models.Model):
     created_at = models.DateTimeField()
     file = models.FileField(upload_to=file_path_dir)
     preview_file = models.FileField(upload_to=file_path_dir, null=True, blank=True)
+    preview_compressed = models.BooleanField()
     size = models.BigIntegerField()
     parent_dir = models.ForeignKey(Directory, on_delete=models.PROTECT, related_name='files')
     owner = models.ForeignKey(User, on_delete=models.PROTECT)
