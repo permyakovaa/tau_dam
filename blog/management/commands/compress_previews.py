@@ -18,7 +18,7 @@ class Command(BaseCommand):
         files = File.objects.filter(preview_compressed=False)[:files_number]
 
         for file in files:
-            self.stdout.write(self.style.INFO('Reading file "%s"' % UPLOADS_DIR + file.file.name))
+            self.stdout.write(self.style.SUCCESS('Reading file "%s"' % UPLOADS_DIR + file.file.name))
 
             if file.is_video():
                 subprocess.call(
