@@ -1,5 +1,4 @@
 .file-row {
-    line-height: 4em;
     margin-top: 10px !important;
     padding-bottom: 10px;
     text-decoration: none;
@@ -91,4 +90,7 @@
 .context-menu a:hover {
     background: #1a1a1a;
     text-decoration: none;
+}
+#progress-bar {
+    display: none;
 }

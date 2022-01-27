@@ -54,8 +54,12 @@ function uploadFile(file, i, array) {
             if (xhr.readyState == 4 && xhr.status == 200) {
 
                 if (window.items_cnt === array.length)  {
-                    setTimeout(() => {location.reload();}, 2000);
+                    location.reload();
                 }
+
+                var file_row = document.querySelector("#gallery li:nth-child(" + window.items_cnt + ") .file-status");
+                file_row.classList.add('text-success');
+                file_row.textContent = 'OK';
             }
             else if (xhr.readyState == 4 && xhr.status != 200) {
               // Ошибка. Сообщаем пользователю
@@ -69,13 +73,15 @@ function previewFile(file) {
       let reader = new FileReader()
       reader.readAsDataURL(file)
       reader.onloadend = function() {
-            let img = document.createElement('img')
-            img.src = reader.result
-            document.getElementById('gallery').appendChild(img)
+            let li = document.createElement('li')
+            li.innerHTML = file.name + " - <span class='file-status'>Загрузка</span>"
+
+            document.getElementById('gallery').appendChild(li)
       }
 }
 function initializeProgress(numFiles) {
-      progressBar.value = 0
+      progressBar.value = 0;
+      progressBar.style.display = "initial";
       uploadProgress = []
       for (let i = numFiles; i > 0; i--) {
             uploadProgress.push(0)
