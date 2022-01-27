@@ -49,13 +49,13 @@ function uploadFile(file, i, array) {
             if (p == 100) {
                 window.items_cnt++;
             }
-            if (window.items_cnt === array.length && p == 100)  {
-                setTimeout(() => {location.reload();}, 2000);
-            }
       })
       xhr.addEventListener('readystatechange', function(e) {
             if (xhr.readyState == 4 && xhr.status == 200) {
-              // Готово. Сообщаем пользователю
+
+                if (window.items_cnt === array.length)  {
+                    setTimeout(() => {location.reload();}, 2000);
+                }
             }
             else if (xhr.readyState == 4 && xhr.status != 200) {
               // Ошибка. Сообщаем пользователю
