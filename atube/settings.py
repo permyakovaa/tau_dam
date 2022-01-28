@@ -11,7 +11,10 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 import os
+import ldap
+
 from pathlib import Path
+from django_auth_ldap.config import LDAPSearch
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -76,6 +79,30 @@ TEMPLATES = [
         },
     },
 ]
+
+AUTHENTICATION_BACKENDS = [
+    "django_auth_ldap.backend.LDAPBackend",
+    "django.contrib.auth.backends.ModelBackend",
+]
+
+AUTH_LDAP_SERVER_URI = "ldap://at.npo"
+AUTH_LDAP_BIND_DN = "OU=Users,OU=Accounts,OU=npoat,DC=at,DC=npo"
+AUTH_LDAP_BIND_PASSWORD = r'nxaH8GjF'
+AUTH_LDAP_USER_SEARCH = LDAPSearch(
+    "CN=nextcloud,OU=Users,OU=Accounts,OU=npoat,DC=at,DC=npo", ldap.SCOPE_SUBTREE
+)
+AUTH_LDAP_GROUP_SEARCH = LDAPSearch(
+    'OU=Groups,DC=internal,DC=acme,DC=com',
+    ldap.SCOPE_SUBTREE,
+    '(objectClass=group)',
+)
+
+AUTH_LDAP_USER_ATTR_MAP = {
+    'username': 'sAMAccountName',
+    'first_name': 'givenName',
+    'last_name': 'sn',
+    'email': 'mail',
+}
 
 WSGI_APPLICATION = 'atube.wsgi.application'
 
@@ -155,3 +182,10 @@ LANGUAGES = (
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/accounts/login/'
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {"console": {"class": "logging.StreamHandler"}},
+    "loggers": {"django_auth_ldap": {"level": "DEBUG", "handlers": ["console"]}},
+}
