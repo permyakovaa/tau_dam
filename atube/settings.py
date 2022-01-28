@@ -86,16 +86,16 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 AUTH_LDAP_SERVER_URI = "ldap://at.npo"
-AUTH_LDAP_BIND_DN = "OU=Users,OU=Accounts,OU=npoat,DC=at,DC=npo"
-AUTH_LDAP_BIND_PASSWORD = r'nxaH8GjF'
+AUTH_LDAP_BIND_DN = "CN=mediaserver,OU=Servers,OU=Accounts,OU=npoat,DC=at,DC=npo"
+AUTH_LDAP_BIND_PASSWORD = 'Rfv5KNJV'
 AUTH_LDAP_USER_SEARCH = LDAPSearch(
-    "CN=nextcloud,OU=Users,OU=Accounts,OU=npoat,DC=at,DC=npo", ldap.SCOPE_SUBTREE
+    "OU=mediaserv,OU=Accounts,OU=npoat,DC=at,DC=npo", ldap.SCOPE_SUBTREE, "(sAMAccountName=%(user)s)"
 )
-AUTH_LDAP_GROUP_SEARCH = LDAPSearch(
-    'OU=Groups,DC=internal,DC=acme,DC=com',
-    ldap.SCOPE_SUBTREE,
-    '(objectClass=group)',
-)
+# AUTH_LDAP_GROUP_SEARCH = LDAPSearch(
+#     'OU=Groups,DC=internal,DC=acme,DC=com',
+#     ldap.SCOPE_SUBTREE,
+#     '(objectClass=group)',
+# )
 
 AUTH_LDAP_USER_ATTR_MAP = {
     'username': 'sAMAccountName',
