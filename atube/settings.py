@@ -14,7 +14,7 @@ import os
 import ldap
 
 from pathlib import Path
-from django_auth_ldap.config import LDAPSearch
+from django_auth_ldap.config import LDAPSearch, GroupOfNamesType
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -89,13 +89,15 @@ AUTH_LDAP_SERVER_URI = "ldap://at.npo"
 AUTH_LDAP_BIND_DN = "CN=mediaserver,OU=Servers,OU=Accounts,OU=npoat,DC=at,DC=npo"
 AUTH_LDAP_BIND_PASSWORD = 'Rfv5KNJV'
 AUTH_LDAP_USER_SEARCH = LDAPSearch(
-    "OU=mediaserv,OU=Accounts,OU=npoat,DC=at,DC=npo", ldap.SCOPE_SUBTREE, "(sAMAccountName=%(user)s)"
+    "OU=Users,OU=Accounts,OU=npoat,DC=at,DC=npo", ldap.SCOPE_SUBTREE, "(sAMAccountName=%(user)s)"
 )
-# AUTH_LDAP_GROUP_SEARCH = LDAPSearch(
-#     'OU=Groups,DC=internal,DC=acme,DC=com',
-#     ldap.SCOPE_SUBTREE,
-#     '(objectClass=group)',
-# )
+
+
+AUTH_LDAP_GROUP_SEARCH = LDAPSearch(
+    "OU=Groups,OU=npoat,DC=at,DC=npo",ldap.SCOPE_SUBTREE, "(objectClass=groupOfNames)"
+)
+AUTH_LDAP_GROUP_TYPE = GroupOfNamesType()
+AUTH_LDAP_REQUIRE_GROUP = "CN=mediaserv,OU=Service,OU=Groups,OU=npoat,DC=at,DC=npo"
 
 AUTH_LDAP_USER_ATTR_MAP = {
     'username': 'sAMAccountName',
