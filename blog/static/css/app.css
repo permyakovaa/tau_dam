@@ -9,6 +9,11 @@
     cursor: pointer;
     color: #000;
 }
+.file-row video {
+    max-height: 50px;
+    background: #333;
+    border: 1px solid #eee;
+}
 .navigation-link {
     color: #000;
     text-decoration: none;
@@ -93,4 +98,20 @@
 }
 #progress-bar {
     display: none;
+}
+
+.event-card {
+    min-height: 413px;
+}
+
+.event-actions {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+}
+
+.event-title {
+    float: right;
+    margin-left: 20px;
+    margin-right: 20px;
 }
