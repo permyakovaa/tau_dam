@@ -52,7 +52,8 @@
     {% endfor %}
     {% for file in current_dir.files.all %}
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 file-row"
-            data-delete-url="{% url 'delete_file' file.id %}">
+            data-delete-url="{% url 'delete_file' file.id %}"
+            data-download-url="{{file.file.url}}">
             <div class="col-xl-1 col-sm-3 col-md-2">
                 {% if file.is_image %}
                     <img src="/uploads/{{file.name}}{% if file.preview_compressed %}_preview{% endif %}{{file.extension}}"
@@ -121,6 +122,7 @@
         <a href="#" id="rename-action">{{ _('Rename') }}</a>
         <a href="#" id="delete-action" data-bs-toggle="modal"
            data-bs-target="#confirmDeleteModal">{{ _('Delete') }}</a>
+        <a href="#" id="download-action" target="_blank">{{ _('Download') }}</a>
     </div>
     <script type="text/javascript" src="{% static 'js/dragndrop-file-load.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/vendor/cash.min.js' %}"></script>
