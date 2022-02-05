@@ -6,10 +6,11 @@
 ```bash
 $ git clone https://gitlab.npo-at.com/backoffice/media-server
 ```
-2. Установить зависимости mysql
+2. Установить зависимости
 ```bash
 $ sudo apt install mysql-server
 $ sudo apt-get install libmysqlclient-dev
+$ sudo apt-get install libmagickwand-dev
 ```
 3. Установить зависимости python
 ```bash
@@ -18,6 +19,7 @@ $ pip3 install django-bootstrap-icons
 $ pip3 install django-crispy-forms
 $ pip3 install crispy-bootstrap5
 $ pip3 install django-bootstrap-v5
+$ pip3 install wand
 ```
 3. Указать настройки mysl
 ```bash

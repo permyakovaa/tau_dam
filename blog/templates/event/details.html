@@ -58,6 +58,14 @@
                     <img src="/uploads/{{file.name}}{% if file.preview_compressed %}_preview{% endif %}{{file.extension}}"
                          class="file-image-preview" style="width:95px;" data-origin="{{ file.file.url }}"
                          data-bs-toggle="modal" data-bs-target="#previewImageModel" data-title="{{file.title}}" />
+                {% elif file.is_pdf %}
+                    {% if file.preview_compressed %}
+                    <img src="/uploads/{{file.name}}_preview.jpg"
+                         class="file-image-preview" style="width:95px;" data-origin="/uploads/{{file.file.name}}_preview.jpg"
+                         data-bs-toggle="modal" data-bs-target="#previewImageModel" data-title="{{file.title}}" />
+                    {% else %}
+                        {% bs_icon 'card-image' size='4em'%}
+                    {% endif %}
                 {% elif file.is_video %}
                     <video src="/uploads/{{file.name}}{% if file.preview_compressed %}_compressed{% endif %}{{file.extension}}" class="video-image-preview" width="95px;" poster="{% if file.preview_compressed %}/uploads/{{ file.name }}_preview.jpg{% else %} /static/images/default_thumb.png {% endif %}"
                         data-bs-toggle="modal" data-bs-target="#previewImageModel" preload="none" data-title="{{file.title}}"
