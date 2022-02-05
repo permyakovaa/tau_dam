@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-28 15:41+0000\n"
+"POT-Creation-Date: 2022-02-05 10:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: atube/settings.py:148
+#: atube/settings.py:182
 msgid "Russian"
 msgstr "Русский"
 
@@ -67,25 +67,29 @@ msgstr ""
 msgid "Select files"
 msgstr "Выберите файлы"
 
-#: blog/templates/event/details.html:81
+#: blog/templates/event/details.html:91
 msgid "Directory is empty"
 msgstr "Директория пуста"
 
-#: blog/templates/event/details.html:95 blog/templates/event/details.html:108
-msgid "Close"
-msgstr "Закрыть"
-
-#: blog/templates/event/details.html:105
+#: blog/templates/event/details.html:112
 msgid "Are you sure you want to delete object?"
 msgstr "Вы уверены, что хотите удалить объект?"
 
-#: blog/templates/event/details.html:109 blog/templates/event/details.html:117
+#: blog/templates/event/details.html:115
+msgid "Close"
+msgstr "Закрыть"
+
+#: blog/templates/event/details.html:116 blog/templates/event/details.html:124
 msgid "Delete"
 msgstr "Удалить"
 
-#: blog/templates/event/details.html:115
+#: blog/templates/event/details.html:122
 msgid "Rename"
 msgstr "Переименовать"
+
+#: blog/templates/event/details.html:125
+msgid "Download"
+msgstr "Скачать"
 
 #: blog/templates/event/form.html:9 blog/templates/project/details.html:10
 msgid "Add new event"
