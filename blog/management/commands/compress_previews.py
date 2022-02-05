@@ -38,7 +38,6 @@ class Command(BaseCommand):
                 self.stdout.write(self.style.SUCCESS('Generated file preview "%s"' % UPLOADS_DIR + file.name() + '_preview' + file.extension()))
             elif file.is_pdf():
                 subprocess.call(['convert', '-resize', '10%', '-crop', '0x200+0+0', UPLOADS_DIR + file.file.name + '[0]', UPLOADS_DIR + file.name() + '_preview.jpg'])
-                subprocess.call(['convert', '-resize', '50%', UPLOADS_DIR + file.file.name, UPLOADS_DIR + file.file.name + '_preview.jpg'])
 
                 self.stdout.write(self.style.SUCCESS('Generated file preview "%s"' % UPLOADS_DIR + file.file.name + '[0]'))
 
