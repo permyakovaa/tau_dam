@@ -7,6 +7,12 @@ $(function () {
         previewModal.find('.modal-title').text($(this).data('title'))
     });
 
+    $('.pdf-image-preview').on('click', function() {
+        let previewModal = $('#previewImageModel');
+        previewModal.find('.modal-body').html('<iframe src="' +  $(this).data('origin') + '" width="100%" height="500px" type="application/pdf">')
+        previewModal.find('.modal-title').text($(this).data('title'))
+    });
+
     $('.video-image-preview').on('click', function() {
         let previewModal = $('#previewImageModel');
         previewModal.find('.modal-body').html('<video width="100%" controls></video>')
