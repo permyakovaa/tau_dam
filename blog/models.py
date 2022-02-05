@@ -64,13 +64,13 @@ class File(models.Model):
         return name
 
     def is_image(self):
-        return self.extension() in ['.png', '.jpeg', '.jpg']
+        return self.extension().lower() in ['.png', '.jpeg', '.jpg']
 
     def is_video(self):
-        return self.extension() in ['.mp4', '.avi', '.webm', '.mov']
+        return self.extension().lower() in ['.mp4', '.avi', '.webm', '.mov']
 
     def is_pdf(self):
-        return self.extension() in ['.pdf']
+        return self.extension().lower() in ['.pdf']
 
     def __str__(self):
         return self.title
