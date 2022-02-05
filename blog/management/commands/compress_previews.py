@@ -35,7 +35,12 @@ class Command(BaseCommand):
                                  'scale=if(gte(a\,320/240)\,min(320\,iw)\,-2):if(gte(a\,320/240)\,-2\,min(240\,ih))',
                                  UPLOADS_DIR + file.name() + '_preview' + file.extension(), '-hide_banner', '-loglevel', 'error'])
 
-                self.stdout.write(self.style.SUCCESS('Generated file preview "%s"' %  UPLOADS_DIR + file.name() + '_preview' + file.extension()))
+                self.stdout.write(self.style.SUCCESS('Generated file preview "%s"' % UPLOADS_DIR + file.name() + '_preview' + file.extension()))
+            elif file.is_pdf():
+                subprocess.call(['convert', '-resize', '10%', '-crop', '0x200+0+0', UPLOADS_DIR + file.file.name + '[0]', UPLOADS_DIR + file.name() + '_preview.jpg'])
+                subprocess.call(['convert', '-resize', '50%', UPLOADS_DIR + file.file.name, UPLOADS_DIR + file.file.name + '_preview.jpg'])
+
+                self.stdout.write(self.style.SUCCESS('Generated file preview "%s"' % UPLOADS_DIR + file.file.name + '[0]'))
 
             file.preview_compressed = True
             file.save()
