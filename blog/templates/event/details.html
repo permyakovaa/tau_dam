@@ -15,6 +15,8 @@
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
         {% if current_dir.parent_dir is not empty %}
             <a href="{% url 'dir_details' event.id current_dir.parent_dir.id %}"  class="navigation-link">{% bs_icon 'arrow-left' size='1.5em' color='grey' %} {{current_dir.parent_dir.title}}</a>
+        {% else %}
+            <a href="{% url 'project_details' event.project.id %}"  class="navigation-link">{% bs_icon 'arrow-left' size='1.5em' color='grey' %} {{event.project.title}}</a>
         {% endif %}
 
         {% if perms.blog.add_file %}
