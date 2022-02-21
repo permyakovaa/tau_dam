@@ -13,11 +13,13 @@
         {% endif %}
     </div>
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-        {% if current_dir.parent_dir is not empty %}
-            <a href="{% url 'dir_details' event.id current_dir.parent_dir.id %}"  class="navigation-link">{% bs_icon 'arrow-left' size='1.5em' color='grey' %} {{current_dir.parent_dir.title}}</a>
-        {% else %}
-            <a href="{% url 'project_details' event.project.id %}"  class="navigation-link">{% bs_icon 'arrow-left' size='1.5em' color='grey' %} {{event.project.title}}</a>
-        {% endif %}
+        <a href="{% url 'project_details' event.project.id %}"  class="navigation-link">{% bs_icon 'folder' size='1em' color='orange' %} {{event.project.title}}</a>
+        <a href="{% url 'event_details' event.id %}"  class="navigation-link">/ {{event.title}}</a>
+        {% for d in current_dir.breadcrumbs %}
+            <a href="{% url 'dir_details' event.id d.id %}"  class="navigation-link">/ {{d.title}}</a>
+        {% endfor %}
+
+        <a href="{% url 'dir_details' event.id current_dir.id %}"  class="navigation-link current_dir">/ {{current_dir.title}}</a>
 
         {% if perms.blog.add_file %}
         <div id="drop-area">

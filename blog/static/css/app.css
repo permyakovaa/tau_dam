@@ -13,13 +13,13 @@
     color: #000;
     text-decoration: none;
     margin-bottom: 10px;
-    font-size: 1.5em;
+    font-size: 1.2em;
 }
 .navigation-link:hover {
-    color: #000;
+    color: #555;
 }
-.navigation-link:hover svg {
-    fill: #000;
+.navigation-link.current_dir {
+    color: #777;
 }
 #drop-area {
     border: 2px dashed #ccc;

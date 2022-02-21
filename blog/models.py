@@ -40,6 +40,18 @@ class Directory(models.Model):
     parent_dir = models.ForeignKey('Directory', on_delete=models.PROTECT, null=True, blank=True, related_name='child_dirs')
     owner = models.ForeignKey(User, on_delete=models.PROTECT)
 
+    def breadcrumbs(self):
+        breadcrumbs = []
+        parent_dir = self.parent_dir
+
+        while parent_dir is not None:
+            if parent_dir.title != '':
+                breadcrumbs.append({'id': parent_dir.id, 'title': parent_dir.title})
+
+            parent_dir = parent_dir.parent_dir
+
+        return reversed(breadcrumbs)
+
     def __str__(self):
         return self.event.title + ': ' + self.title
 
