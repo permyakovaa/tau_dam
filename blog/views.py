@@ -47,7 +47,7 @@ def project_edit(request, id):
         if form.is_valid():
             project = form.save(commit=False)
             project.save()
-            return redirect('project_details', id=project.pk)
+            return redirect('projects_list')
     else:
         form = ProjectForm(instance=project)
 
@@ -89,7 +89,7 @@ def event_edit(request, id):
         if form.is_valid():
             event = form.save(commit=False)
             event.save()
-            return redirect('event_details', id=event.pk)
+            return redirect('project_details', id=event.project.pk)
     else:
         form = EventForm(instance=event)
 

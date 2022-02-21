@@ -3,7 +3,7 @@ from .views import project_details, project_new, project_edit, projects_list, ev
 from .views import event_new, event_edit, directory_new, change_directory, delete_directory, add_file, delete_file
 
 urlpatterns = [
-    path('', projects_list),
+    path('', projects_list, name='projects_list'),
     path('project/new/', project_new, name='project_new'),
     path('project/edit/<int:id>/', project_edit, name='project_edit'),
     path('project/<int:id>/', project_details, name='project_details'),
