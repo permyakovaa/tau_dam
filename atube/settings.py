@@ -115,9 +115,14 @@ WSGI_APPLICATION = 'atube.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'tau_dam',
+        'USER': 'root',
+        'PASSWORD': '3sYWdrTn',
+        'HOST': 'mysql-container-dam',
+        'PORT': 3306,
         'OPTIONS': {
-            'read_default_file': '/usr/local/etc/my.cnf',
-        },
+            'auth_plugin': 'mysql_native_password'
+        }
     }
 }
 

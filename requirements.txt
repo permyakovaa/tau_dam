@@ -1,0 +1,8 @@
+mysqlclient
+django-bootstrap-icons
+django-crispy-forms
+crispy-bootstrap5
+django-bootstrap-v5
+python-ldap
+django_auth_ldap
+wand
