@@ -1,65 +1,60 @@
-# Медиа Сервер
+# Tau Digigtal Assets Management system
 
-Сервис для хранения медиа файлов компании. Написан на Python и Django
-
-1. Склонировать репо: 
+## To run website in Docker:
+1. Create .env file and setup database connection parameters
 ```bash
-$ git clone https://gitlab.npo-at.com/backoffice/media-server
-```
-2. Установить зависимости
-```bash
-$ sudo apt install mysql-server
-$ sudo apt-get install libmysqlclient-dev
-$ sudo apt-get install libmagickwand-dev
-```
-3. Установить зависимости python
-```bash
-$ pip3 install mysqlclient
-$ pip3 install django-bootstrap-icons
-$ pip3 install django-crispy-forms
-$ pip3 install crispy-bootstrap5
-$ pip3 install django-bootstrap-v5
-$ pip3 install wand
-```
-3. Указать настройки mysl
-```bash
-$ nano /usr/local/etc/my.cnf
-```
-```bash
-[mysqld]
-# Only allow connections from localhost
-bind-address = 127.0.0.1
-mysqlx-bind-address = 127.0.0.1
-
-# my.cnf
-[client]
-database = atms
-user = username
-password = password
-default-character-set = utf8
-```
-4. Накатить миграции на БД
-```bash
-$ python3 manage.py migrate
-```
-5. Запуск сервера
-```bash
-$ python3 manage.py runserver
+cp atube/.env.template atube/.env
+nano atube/.env
 ```
 
-6. Создать супер юзера для админки
+2. Create docker network to connect app container and mysql contrainer
 ```bash
-$ python3 manage.py createsuperuser
+docker network create websitenetwork
 ```
 
-7. Залогиниться в админке /admin
+3. Setup mysql server container (don't forget to change YOUR_PASSWORD)
+```bash
+docker run --name mysql-container --network websitenetwork -e MYSQL_ROOT_PASSWORD=YOUR_PASSWORD -e MYSQL_DATABASE=tau_dam -d mysql:latest
+```
 
-# Для развертки production сервера:
-1. pip3 install uwsgi
-3. sudo apt-get install nginx
+4. Connect to mysql docker image
+```bash
+docker exec -it mysql-container bash
+```
 
-# Сервер ffmpeg для компрессии по задачами из загрузки файлов:
-1. sudo apt install ffmpeg
-2. sudo apt install libzmq5
-3. pip3 install pyzmq
-4. В корне репо запустить сервер python3 zmq_server.py
+5. Connect to mysql
+```bash
+mysql -u root -p
+```
+
+6. Execute mysql queries (don't forget to change YOUR_PASSWORD)
+```bash
+ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'YOUR_PASSWORD';
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'YOUR_PASSWORD';
+flush privileges;
+```
+
+7. Build website container
+```bash
+docker build -t tau_dam .
+```
+
+8. Run website container
+```bash
+docker run -d --network websitenetwork -p 8000:8000 tau_dam
+```
+
+9. Connect to app docker container
+```bash
+docker exec -it tau_dam bash
+```
+
+10. Execute migrations
+```bash
+python3 manage.py migrate
+```
+
+11. Add superuser
+```bash
+python3 manage.py createsuperuser
+```
