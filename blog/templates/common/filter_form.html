@@ -1,0 +1,10 @@
+<form method="GET" class="row g-3 align-items-center" action="">
+    {% for field in filter.form %}
+      <div class="col-auto">
+        <input type="text" class="form-control" name="{{ field.name }}" value="{{ field.value|default:'' }}" placeholder="{{ field.label|default:'' }}">
+      </div>
+    {% endfor %}
+    <div class="col-auto">
+      <button type="submit" class="btn btn-primary">Filter</button>
+    </div>
+</form>

@@ -1,6 +1,8 @@
 # Базовый образ, который содержит Python
 FROM python:3.8-slim-buster
 
+VOLUME /code/uploads
+
 # Установка переменной окружения для запуска в режиме production
 ENV DJANGO_ENV=production
 
