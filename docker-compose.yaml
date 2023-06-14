@@ -1,0 +1,31 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: tau_dam
+    volumes:
+      - ./uploads:/code/uploads
+    ports:
+      - 8001:8001
+    environment:
+      - DB_ENGINE=django.db.backends.postgresql
+      - DB_NAME=tau_dam
+      - DB_USER=tau_user
+      - DB_PASSWORD=3sYWdrTn
+      - DB_HOST=db
+      - DB_PORT=5432
+    depends_on:
+      - db
+  db:
+    image: postgres
+    container_name: postgres-container-dam
+    environment:
+      - POSTGRES_DB=tau_dam
+      - POSTGRES_USER=tau_user
+      - POSTGRES_PASSWORD=3sYWdrTn
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+volumes:
+  pgdata:

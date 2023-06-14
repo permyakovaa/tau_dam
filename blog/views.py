@@ -3,6 +3,7 @@ import os
 from django.shortcuts import render
 from .models import Project, Event, Directory, File
 from .forms import ProjectForm, EventForm, DirectoryForm, FileForm
+from .filters import ProjectFilter
 from django.shortcuts import redirect, get_object_or_404
 from django.utils import timezone
 from django.http import JsonResponse
@@ -213,8 +214,6 @@ def delete_file(request, id):
 @login_required
 def projects_list(request):
     projects = Project.objects.all()
-    context = {
-        'projects': projects
-    }
+    project_filter = ProjectFilter(request.GET, queryset=projects)
 
-    return render(request, "project/list.html", context)
+    return render(request, "project/list.html", {'filter': project_filter})
