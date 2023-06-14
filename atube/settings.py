@@ -38,7 +38,6 @@ CORS_ORIGIN_WHITELIST = [
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
-
 # Application definition
 
 INSTALLED_APPS = [
