@@ -30,6 +30,10 @@ SECRET_KEY = 'django-insecure-!$n8f%36)d#8s(m6gv_8hbaa2m0j72d!%vpwmj6ky&yh$-^6lg
 DEBUG = True
 
 ALLOWED_HOSTS = ['dam.a-r-s.dev', '127.0.0.1']
+CORS_ORIGIN_WHITELIST = [
+    'https://dam.a-r-s.dev',
+    # Other allowed origins...
+]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
