@@ -11,7 +11,8 @@ ENV PYTHONUNBUFFERED=1
 
 # Install MySQL client
 RUN apt-get update \
-    && apt-get install -y default-libmysqlclient-dev build-essential ldap-utils libldap2-dev libsasl2-dev\
+    && apt-get install -y default-libmysqlclient-dev build-essential ldap-utils \
+    libldap2-dev libsasl2-dev imagemagick libmagickwand-dev ffmpeg \
     && rm -rf /var/lib/apt/lists/*
 
 # Установка рабочей директории внутри контейнера
