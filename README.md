@@ -20,3 +20,9 @@ python3 manage.py migrate
 ```bash
 python3 manage.py createsuperuser
 ```
+
+5. Run cronjobs
+```bash
+env > env_list.txt
+cron
+```
