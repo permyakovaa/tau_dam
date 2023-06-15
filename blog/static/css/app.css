@@ -2,7 +2,9 @@
     margin-top: 10px !important;
     padding-bottom: 10px;
     text-decoration: none;
-    color: #000;
+    font-size: 14px;
+    color: #555;
+    line-height: 50px;
 }
 .file-row:hover {
     background: #f1f1f1;
@@ -116,4 +118,10 @@
 
 .navbar-brand img {
     margin-right: 10px;
+}
+.preview-col {
+    text-align: center;   
+}
+.preview-col img, .preview-col video {
+    width: 60px;
 }
