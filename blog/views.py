@@ -3,7 +3,7 @@ import os
 from django.shortcuts import render
 from .models import Project, Event, Directory, File
 from .forms import ProjectForm, EventForm, DirectoryForm, FileForm
-from .filters import ProjectFilter
+from .filters import ProjectFilter, EventFilter
 from django.shortcuts import redirect, get_object_or_404
 from django.utils import timezone
 from django.http import JsonResponse
@@ -14,9 +14,11 @@ from django.contrib.auth.decorators import login_required, permission_required
 def project_details(request, id):
     project = Project.objects.get(id=id)
     events = Event.objects.filter(project__id=project.id)
+    event_filter = EventFilter(request.GET, queryset=events)
+
     context = {
         'project': project,
-        'events': events
+        'filter': event_filter,
     }
 
     return render(request, "project/details.html", context)

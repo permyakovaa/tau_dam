@@ -15,10 +15,12 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         files_number = options['files_number']
 
-        files = File.objects.filter(preview_compressed=False)[:files_number]
+        files = File.objects.filter(preview_compressed=False, compressing = False)[:files_number]
 
         for file in files:
-            self.stdout.write(self.style.SUCCESS('Reading file "%s"' % UPLOADS_DIR + file.file.name))
+            self.stdout.write(self.style.SUCCESS('Reading file %s' % UPLOADS_DIR + file.file.name))
+            file.compressing = True;
+            file.save()
 
             if file.is_video():
                 subprocess.call(
