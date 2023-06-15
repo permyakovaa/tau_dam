@@ -31,13 +31,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['dam.a-r-s.dev', '127.0.0.1']
 CORS_ORIGIN_WHITELIST = [
-    'https://dam.a-r-s.dev',
+    'https://dam.a-r-s.dev:80',
     # Other allowed origins...
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
-
 
 # Application definition
 
