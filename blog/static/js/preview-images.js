@@ -1,3 +1,9 @@
+$(document).ready(function() {
+    document.addEventListener('*', function (event) {
+        console.log('Event:', event.type);
+    });
+})
+
 $(function () {
     $('.file-image-preview').on('click', function() {
         let previewModal = $('#previewImageModel');
@@ -10,16 +16,15 @@ $(function () {
     $('.pdf-image-preview').on('click', function() {
         let previewModal = $('#previewImageModel');
         previewModal.find('.modal-body').html('<iframe src="' +  $(this).data('origin') + '" width="100%" height="500px" type="application/pdf">')
-        previewModal.find('.modal-title').text($(this).data('title'))
+        previewModal.find('.modal-title').text($(this).data('title'));
     });
 
     $('.video-image-preview').on('click', function() {
         let previewModal = $('#previewImageModel');
-        previewModal.find('.modal-body').html('<video width="100%" controls></video>')
+        previewModal.find('.modal-body').html('<video id="video-preview" width="100%" controls></video>')
         previewModal.find('.modal-body video').attr('src', $(this).attr('src'));
         previewModal.find('.modal-title').text($(this).data('title'))
     });
-
     $('body').on("keyup", function(e) {
          let previewImg;
          if (e.which === 37) {
