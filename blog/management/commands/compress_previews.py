@@ -27,21 +27,21 @@ class Command(BaseCommand):
                     ['ffmpeg', '-y', '-i', UPLOADS_DIR + file.file.name, '-ss', '00:00:01.000', '-vframes', '1',
                      '-q:v', '10', UPLOADS_DIR + file.name() + '_preview.jpg', '-hide_banner', '-loglevel', 'error'])
 
-                self.stdout.write(self.style.SUCCESS('Generated file preview "%s"' % UPLOADS_DIR + file.name() + '_preview.jpg'))
+                self.stdout.write(self.style.SUCCESS('Generated file preview %s' % UPLOADS_DIR + file.name() + '_preview.jpg'))
 
                 subprocess.call(['ffmpeg', '-y', '-i', UPLOADS_DIR + file.file.name, '-crf', '28',
                                  UPLOADS_DIR + file.name() + '_compressed' + file.extension(), '-hide_banner', '-loglevel', 'error'])
-                self.stdout.write(self.style.SUCCESS('Compressed video "%s"' % UPLOADS_DIR + file.name() + '_compressed' + file.extension()))
+                self.stdout.write(self.style.SUCCESS('Compressed video %s' % UPLOADS_DIR + file.name() + '_compressed' + file.extension()))
             elif file.is_image():
                 subprocess.call(['ffmpeg', '-y', '-i', UPLOADS_DIR + file.file.name, '-q:v', '30', '-vf',
                                  'scale=if(gte(a\,320/240)\,min(320\,iw)\,-2):if(gte(a\,320/240)\,-2\,min(240\,ih))',
                                  UPLOADS_DIR + file.name() + '_preview' + file.extension(), '-hide_banner', '-loglevel', 'error'])
 
-                self.stdout.write(self.style.SUCCESS('Generated file preview "%s"' % UPLOADS_DIR + file.name() + '_preview' + file.extension()))
+                self.stdout.write(self.style.SUCCESS('Generated file preview %s' % UPLOADS_DIR + file.name() + '_preview' + file.extension()))
             elif file.is_pdf():
                 subprocess.call(['convert', '-resize', '10%', '-crop', '0x200+0+0', UPLOADS_DIR + file.file.name + '[0]', UPLOADS_DIR + file.name() + '_preview.jpg'])
 
-                self.stdout.write(self.style.SUCCESS('Generated file preview "%s"' % UPLOADS_DIR + file.file.name + '[0]'))
+                self.stdout.write(self.style.SUCCESS('Generated file preview %s' % UPLOADS_DIR + file.file.name + '[0]'))
 
             file.preview_compressed = True
             file.save()
