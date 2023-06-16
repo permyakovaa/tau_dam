@@ -61,18 +61,19 @@
             <div class="col-xl-1 col-sm-3 col-md-2 preview-col">
                 {% if file.is_image %}
                     <img src="/uploads/{{file.name}}{% if file.preview_compressed %}_preview{% endif %}{{file.extension}}"
-                         class="file-image-preview" data-origin="{{ file.file.url }}"
+                         class="show-preview" data-type="image" data-origin="{{ file.file.url }}"
                          data-bs-toggle="modal" data-bs-target="#previewImageModel" data-title="{{file.title}}" />
                 {% elif file.is_pdf %}
                     {% if file.preview_compressed %}
                     <img src="/uploads/{{file.name}}_preview.jpg"
-                         class="pdf-image-preview" data-origin="{{file.file.url}}"
+                         class="show-preview" data-type="pdf" data-origin="{{file.file.url}}"
                          data-bs-toggle="modal" data-bs-target="#previewImageModel" data-title="{{file.title}}" />
                     {% else %}
                         {% bs_icon 'card-image' size='4em' extra_classes='pdf-image-preview'%}
                     {% endif %}
                 {% elif file.is_video %}
-                    <video src="/uploads/{{file.name}}{% if file.preview_compressed %}_compressed{% endif %}{{file.extension}}" class="video-image-preview" poster="{% if file.preview_compressed %}/uploads/{{ file.name }}_preview.jpg{% else %} /static/images/default_thumb.png {% endif %}"
+                    <video src="/uploads/{{file.name}}{% if file.preview_compressed %}_compressed{% endif %}{{file.extension}}" 
+                        class="show-preview" data-type="video" data-origin="/uploads/{{file.name}}{% if file.preview_compressed %}_compressed{% endif %}{{file.extension}}" poster="{% if file.preview_compressed %}/uploads/{{ file.name }}_preview.jpg{% else %} /static/images/default_thumb.png {% endif %}"
                         data-bs-toggle="modal" data-bs-target="#previewImageModel" preload="none" data-title="{{file.title}}"
                     ></video>
                 {% else %}
@@ -98,7 +99,7 @@
         <p class="bd-lead">{{ _('Directory is empty')}}</p>
     {% endif %}
 
-    <div class="modal fade" id="previewImageModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="previewImageModel" tabindex="-1" aria-labelledby="previewModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-xl">
                 <div class="modal-content">
                       <div class="modal-header">

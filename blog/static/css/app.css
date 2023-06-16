@@ -127,3 +127,14 @@
 .preview-col img, .preview-col video {
     width: 60px;
 }
+#previewImageModel .modal-body {
+    align-items: center;
+    justify-content: center;
+    display: flex; 
+}
+#previewImageModel .modal-body img,
+#previewImageModel .modal-body video {
+    max-width: 100%;
+    max-height: 73vh;
+    object-fit: contain;
+}
