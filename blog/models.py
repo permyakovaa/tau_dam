@@ -14,10 +14,21 @@ class Project(models.Model):
     created_at = models.DateTimeField()
     thumbnail = models.FileField(upload_to='project/preview/')
     owner = models.ForeignKey(User, on_delete=models.PROTECT)
+    thumbnail_compressed = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title
+    
+    def thumb_url(self):
+        thumb_url = self.thumbnail.name
 
+        if (self.thumbnail_compressed):
+            name, extension = os.path.splitext(self.thumbnail.name)
+
+            thumb_url = name + '_preview' + extension
+
+        return thumb_url
+    
 
 class Event(models.Model):
     objects = models.Manager()
@@ -27,10 +38,20 @@ class Event(models.Model):
     thumbnail = models.FileField(upload_to='project/preview/')
     project = models.ForeignKey(Project, on_delete=models.PROTECT)
     owner = models.ForeignKey(User, on_delete=models.PROTECT)
+    thumbnail_compressed = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title
+    
+    def thumb_url(self):
+        thumb_url = self.thumbnail.name
 
+        if (self.thumbnail_compressed):
+            name, extension = os.path.splitext(self.thumbnail.name)
+
+            thumb_url = name + '_preview' + extension
+
+        return thumb_url
 
 class Directory(models.Model):
     objects = models.Manager()
